@@ -1,0 +1,58 @@
+.devTable {
+  height: 260px;
+  overflow-y: scroll; /* or auto */
+}
+
+.formBox {
+  border: 1px solid black;
+  margin-top: 5px;
+  font-size: 1.2rem;
+}
+
+.devRow:hover {
+  background-color: lightgray;
+}
+
+.repoForm {
+  padding-bottom: 1%;
+}
+
+.boxTitle {
+  text-decoration: underline;
+  margin-left: 5%;
+}
+
+.repoName {
+  font-weight: bold;
+  margin-left: 1%;
+}
+
+.inputGroup {
+  margin-left: 3%;
+}
+
+.inputLabel {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.flagLabel {
+  line-height: 1.4rem;
+}
+
+.urlBox {
+  width: 25rem;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.searchLine {
+  margin-left: 5%;
+  margin-bottom: 10%;
+}
+
+button {
+  background-color: rgb(57, 67, 121);
+  color: white;
+}

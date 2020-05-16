@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Developer from "./pages/Developer";
 import DevHome from "./pages/DevHome";
 import NoMatch from "./pages/NoMatch";
-import About from "./pages/About";
+// import About from "./pages/About";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Signin from "./pages/Signin/Signin";
@@ -71,10 +71,10 @@ const App = () => {
                     {setup.initialized ? (
                       <Route exact path="/" component={Home} />
                     ) : (
-                      <Route exact path="/" component={Signin} />
-                    )}
+                        <Route exact path="/" component={Signin} />
+                      )}
                     <Route exact path="/contact" component={Contact} />
-                    <Route exact path="/about" component={About} />
+                    {/* <Route exact path="/about" component={About} /> */}
                     <Route exact path="/Developer" component={Developer} />
                     <Route exact path="/Signin" component={Signin} />
                     <Route exact path="/DevHome" component={DevHome} />

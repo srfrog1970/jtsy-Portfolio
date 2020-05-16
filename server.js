@@ -22,7 +22,7 @@ app.use(routes);
 
 // Connect to the Mongo DB (portfolio_db)
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/portfolio_db",
+  process.env.MONGODB_URI || "mongodb://jtsy:1823_Well@ds231588.mlab.com:31588/heroku_q10590vf",
   {
     useCreateIndex: true,
     useNewUrlParser: true,

@@ -14,7 +14,7 @@ router.use("/api", apiRoutes);
 router.use("/util", utilRoutes);
 
 // If no API routes are hit, send the React app (landing page)
-router.use((req, res) =>
+router.use("*", (req, res) =>
   res.sendFile(path.join(__dirname, "../client/public/index.html"))
 );
 

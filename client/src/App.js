@@ -69,7 +69,7 @@ const App = () => {
                 <DevDataContext.Provider value={devDataProvider}>
                   <SetupContext.Provider value={setupProvider}>
                     {setup.initialized ? (
-                      <Route exact path="/" component={DevHome} />
+                      <Route exact path="/" component={Home} />
                     ) : (
                         <Route exact path="/" component={Signin} />
                       )}

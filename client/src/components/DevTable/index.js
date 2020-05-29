@@ -1,9 +1,10 @@
 // import axios from "axios";
 import _ from "lodash";
 import React, { useState, useEffect, useContext, Fragment } from "react";
-import { Table, Form, Button } from "semantic-ui-react";
+import { Table, Form, Button, Modal, Grid, Container, Segment } from "semantic-ui-react";
 import API from "../../utils/API";
 import RepoSearchBox from "../RepoSearchBox";
+import DevModal from "../DevModal"
 import './style.css'
 // import RepositoryContext from "../../contexts/DevDataContext";
 
@@ -18,7 +19,7 @@ const DevTable = () => {
     data: null,
     sort: null,
     direction: null,
-    rowClick: -1,
+    rowClick: false,
     deploymentLink: "",
     repoName: "",
     filteredRepos: null,
@@ -109,7 +110,13 @@ const DevTable = () => {
     updateDB(state.id, { deploymentLink: state.deploymentLink })
   }
 
-
+  const handleClick = (e) => {
+    console.log('in handleClick')
+    setState({
+      ...state,
+      rowClick: false,
+    });
+  }
 
   const handleSearchChange = event => {
 
@@ -171,7 +178,7 @@ const DevTable = () => {
     setState({
       ...state,
       id: tableData[id]._id,
-      rowClick: id,
+      rowClick: true,
       deploymentLink: tableData[id].deploymentLink,
       repoName: tableData[id].repoName,
 
@@ -227,43 +234,57 @@ const DevTable = () => {
           </Table.Body>
         </Table >
       </div >
-      {rowClick >= 0 &&
-        <div className="formBox">
-
-          <Fragment>
-            <div className="boxTitle">
-              <p>
+      <div>
+        <Container>
+          <Modal
+            open={state.rowClick}
+            centered={false}
+            size="small"
+          >
+            <Modal.Header>Update Repository</Modal.Header>
+            <Modal.Content>
+              <Modal.Description as="p" className="boxTitle">
                 Information for Repository: <span className="repoName">{state.repoName}</span>
-              </p>
-            </div>
-            <Form inverted className="repoForm">
-              <Form.Group grouped className="inputGroup">
-                <Form.Field width="5">
-                  <p className="flagLabel">Click 'Change' Button</p>
-                  <label className="inputLabel">Active Flag: {activeFlag.activeFlag}</label>
-                  {/* <input width={2} name="activeFlag" label='ActiveFlag Value' value={this.state.activeFlag} control='input' /> */}
-                </Form.Field>
-                <Form.Field label='' control='button' color="blue" name="updateFlag" onClick={() => updateFlag(state.rowClick)}>
-                  Change
-                  </Form.Field>
-              </Form.Group>
-            </Form>
-            <Form className="repoForm" onSubmit={handleFormSubmit}>
-              <Form.Group grouped className="inputGroup">
-                <Form.Field>
-                  <p className="flagLabel">Enter Deployment URL </p>
-                  <label className="inputLabel">Deployment URL: <span className="repoName"></span></label>
-                  <input className="urlBox" name="deploymentLink" label='Deployment URL: ' placeholder={state.deploymentLink} value={state.value} onChange={(event) => handleInputChange(event)} />
-                </Form.Field>
-                <Form.Field>
-                  <Button primary type='submit'>Update</Button>
+              </Modal.Description>
+              <Segment>
+                <Form >
+                  <Form.Group>
+                    <Form.Field>
+                      <p className="flagLabel">Update activeFlag </p>
+                      <label className="inputLabel">Active Flag: <span className="repoName">{state.activeFlag}</span></label>
+                      {/* <input width={2} name="activeFlag" label='ActiveFlag Value' value={this.state.activeFlag} control='input' /> */}
+                    </Form.Field>
+                    <Form.Field>
+                      <Button type="submit" color="blue" name="updateFlag" onClick={() => updateFlag(state.rowClick)}>Change</Button>
+                    </Form.Field>
+                  </Form.Group>
+                </Form>
+              </Segment>
+              <Segment>
+                <Form>
+                  <Form.Group>
+                    <Form.Field>
+                      <p className="flagLabel">Enter Deployment URL </p>
+                      <label className="inputLabel">Deployment URL: <span className="repoName">{state.deploymentLink}</span></label>
+                      <input className="urlBox" name="deploymentLink" label='Deployment URL: ' placeholder="new link" value={state.value} onChange={(event) => handleInputChange(event)} />
+                    </Form.Field>
+                    <Form.Field>
+                      <Button primary type='submit'>Update</Button>
 
-                </Form.Field>
-              </Form.Group>
-            </Form>
-          </Fragment>
-        </div>
-      }
+                    </Form.Field>
+                  </Form.Group>
+                </Form>
+              </Segment>
+              <Segment>
+                <Button color="blue" fluid size="large" active
+                  onClick={e => handleClick()}>
+                  Close
+                </Button>
+              </Segment>
+            </Modal.Content>
+          </Modal>
+        </Container>
+      </div>
     </Fragment >
   );
   return content;

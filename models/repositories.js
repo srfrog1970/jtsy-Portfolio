@@ -26,6 +26,10 @@ const repositoriesSchema = new Schema({
     type: String,
     required: false,
   },
+  imageLink: {
+    type: String,
+    required: false,
+  },
   html_url: {
     type: String,
     required: true,

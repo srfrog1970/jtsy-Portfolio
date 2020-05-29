@@ -57,6 +57,7 @@ const App = () => {
         console.log('7a. after setting state and rendering, call getsync', github)
         API.getsync(github);
       } else {
+        console.log('in App.js useEffect, no existing dev')
         setSetup({
           isLoadedFlag: true,
           initialized: false,

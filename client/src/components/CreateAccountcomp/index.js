@@ -21,6 +21,7 @@ const emailRegex = RegExp(
 
 //   return valid;
 // };
+console.log('in CreateAccountcomp')
 
 class CreateAccountComp extends Component {
   constructor(props) {
@@ -45,8 +46,9 @@ class CreateAccountComp extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("HMMMM");
+    console.log("HMMMM leaving CreateAccountcomp");
     this.props.handleInputChange();
+    console.log('CreateAccountcomp call getsync()')
     API.getsync(this.state.githubID);
     // this.state.loaded = true;
     this.setState({

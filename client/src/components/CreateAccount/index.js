@@ -21,6 +21,9 @@ const formValid = ({ formErrors, ...rest }) => {
   return valid;
 };
 
+
+console.log('in CreateAccount.js')
+
 class CreateAccountComp extends Component {
   constructor(props) {
     super(props);

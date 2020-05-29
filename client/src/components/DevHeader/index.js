@@ -1,10 +1,15 @@
 import React from 'react'
 import { Header } from 'semantic-ui-react'
-import "./style.css";
+import "./devHeader.css";
 
 const DevHeader = () => (
     <div>
-        <Header as='h1' textAlign='center' dividing>Portfolio Generator</Header>
+        <Header as='h2'
+            className="devHeader"
+            textAlign='center'
+            dividing>
+            Welcome to Portfolio Generator
+        </Header>
     </div>
 )
 

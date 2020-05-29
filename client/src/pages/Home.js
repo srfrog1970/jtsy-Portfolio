@@ -1,15 +1,18 @@
-import React, { useState, useEffect, useContext } from "react";
+// import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Jumbotron } from "../components/JumboTron";
 import PortCards from "../components/PortCards/portCards";
 import SearchBar from "../components/SearchBar/searchBar";
-import { Container, Button, Row } from "react-bootstrap";
-import DevDataContext from "../utils/DevDataContext";
-import SetupContext from "../utils/SetupContext";
-import { NavigationBar } from "../components/HomeNav";
+import DevDataContext from "../contexts/DevDataContext";
+import { Row } from "react-bootstrap";
+// import { Container } from "semantic-ui-react";
+// import SetupContext from "../contexts/SetupContext";
+import HomeNav from "../components/HomeNav";
+import "./home.css";
 
 function Home() {
   const { devData } = useContext(DevDataContext);
-  const { setup, setSetup } = useContext(SetupContext);
+  // const { setup, setSetup } = useContext(SetupContext);
   const [displayRepos, setdisplayRepos] = useState({
     displayRepos: devData.repositories,
   });
@@ -30,20 +33,16 @@ function Home() {
   };
 
   return (
-    <div>
-      <NavigationBar />
+    <div className='home'>
+      <HomeNav />
       <Jumbotron></Jumbotron>
-      <Container>
-        <Row>
-          <SearchBar
-            handleInputChange={handleInputChange}
-            resetSearch={resetSearch}
-          ></SearchBar>
-        </Row>
-      </Container>
-      <Container>
-        <PortCards repositories={displayRepos.displayRepos}></PortCards>
-      </Container>
+      <Row>
+        <SearchBar
+          handleInputChange={handleInputChange}
+          resetSearch={resetSearch}
+        ></SearchBar>
+      </Row>
+      <PortCards className="cards" repositories={displayRepos.displayRepos}></PortCards>
     </div>
   );
 }

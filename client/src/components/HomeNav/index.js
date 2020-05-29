@@ -1,58 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Nav, Navbar } from "react-bootstrap";
-import styled from "styled-components";
+import React from 'react';
+import { Menu } from 'semantic-ui-react';
+import "./style.css";
 
-const Styles = styled.div`
-  .navbar {
-    background-color: #222;
-  }
+const HomeNav = props => {
 
-  a,
-  .navbar-brand,
-  .navbar-nav .nav-link {
-    color: #bbb;
+  let content = (
+    <div>
+      <Menu inverted stackable fixed="top" className="menu">
+        <Menu.Item header className="logo">PORTFOLIO GENERATOR</Menu.Item>
+        <Menu.Menu position="left">
+          <Menu.Item as="a" href="/" name="home">
+          </Menu.Item>
+        </Menu.Menu>
+        <Menu.Menu position="right">
+          <Menu.Item as="a" href="/about" name="about">
+          </Menu.Item>
 
-    &:hover {
-      color: white;
-    }
-  }
-`;
+          <Menu.Item as="a" href="/contact" name="contact">
+          </Menu.Item>
 
-export const NavigationBar = () => (
-  <Styles>
-    <Navbar expand="lg">
-      <Navbar.Brand href="/">Portfolio</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Item>
-            <Nav.Link>
-              <Link to="/">Home</Link>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
-              <Link to="/about">About</Link>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
-              <Link to="/contact">Contact</Link>
-            </Nav.Link>
-          </Nav.Item>
-          {/* <Nav.Item>
-            <Nav.Link>
-              <Link to="/Developer">Developer</Link>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
-              <Link to="/Signin">Signin</Link>
-            </Nav.Link>
-          </Nav.Item> */}
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  </Styles>
-);
+          <Menu.Item href="/login" name="login">
+          </Menu.Item>
+
+          <Menu.Item as="a" href="/developer" name="developer">
+          </Menu.Item>
+        </Menu.Menu>
+      </Menu>
+
+    </div >
+  )
+  return content
+}
+
+export default HomeNav;

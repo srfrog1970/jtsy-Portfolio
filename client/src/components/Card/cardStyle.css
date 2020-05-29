@@ -1,0 +1,10 @@
+.repoCard {
+  /* width: 600px; */
+  height: 300px;
+}
+
+.bgImage {
+  background-image: url("https://i.ibb.co/wcJjNs1/top-shelf.png");
+  width: 100%;
+  height: 66%;
+}

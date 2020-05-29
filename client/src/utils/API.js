@@ -5,6 +5,7 @@ export default {
 
   // Send in the github user name
   getActiveDevData: function () {
+    console.log('2. in API.js getActiveDevData, to routes/index.js /api/devData/activeDevData/')
     return axios.get("/api/devData/activeDevData/");
   },
 
@@ -30,6 +31,7 @@ export default {
   // Call this function to find the active Developer.  You do not need to pass anything in.  If none are active, it is not setup yet.
 
   getsync: function (githubID) {
+    console.log('8. in API.js getsync (util route)', githubID)
     return axios.post("/util/sync/" + githubID);
   },
 };

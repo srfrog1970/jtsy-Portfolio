@@ -1,11 +1,11 @@
 import React from "react";
 import AboutMeComp from "../components/AboutMeComp/AboutMeComp";
-import { NavigationBar } from "../components/HomeNav";
+import HomeNav from "../components/HomeNav";
 
 function About() {
   return (
     <div>
-      <NavigationBar />
+      <HomeNav />
       <AboutMeComp></AboutMeComp>
     </div>
   );

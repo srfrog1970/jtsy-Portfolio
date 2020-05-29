@@ -2,10 +2,12 @@ const db = require("../models");
 const mongoose = require("mongoose");
 const axios = require("axios");
 
+console.log('10. in utilController')
 module.exports = {
   // Synch the databases -Notes are in the function.
   syncDatabase: function (req, res) {
     const developerLoginName = req.params.id;
+    console.log('10a. in utilController/syncDatabase', developerLoginName)
     updateDevDB(developerLoginName);
     return true;
   },
@@ -18,15 +20,15 @@ module.exports = {
 // If a user deletes a repository on github.  Currently, this will make the repository attribute "archive" to true and "active" for false.  TODO: It would be nice if we could have a form that shows all archived items.
 
 function updateDevDB(developerLoginName) {
+  console.log('11. in updateDevDB ', developerLoginName)
   var gitHubData;
   var devData;
   // console.log('top of updateDevDB')
   // Get the github user and repository data.
   axios
     .get(
-      "https://api.github.com/users/" + developerLoginName + "/repos?type=all?per_page=2"
+      "https://api.github.com/users/" + developerLoginName + "/repos?type=all"
     )
-    // "https://api.github.com/users/frunox/repos?type=all"
     // "https://api.github.com/search/repositories?q=user:" + developerLoginName
     // Set gitHubData to the returned data.  TODO: I thought this line of code would work?
     // .then((gitHubData) => {})
@@ -37,9 +39,9 @@ function updateDevDB(developerLoginName) {
     .then(() => {
       return db.Developer.findOne({ developerLoginName: developerLoginName });
     })
-    // Take the devData and gitHubData and call loadDB to synch Databases.
+    // Take the devData (list of repo ids) and gitHubData and call loadDB to synch Databases.
     .then((devData) => {
-      // console.log(gitHubData.data[0])
+      console.log('12. calling loadDB ', developerLoginName)
       loadDB(developerLoginName, devData, gitHubData.data);
     })
     .catch((err) => console.log(err));
@@ -47,6 +49,7 @@ function updateDevDB(developerLoginName) {
 
 function loadDB(developerLoginName, devData, gitHubData) {
   //  If there is no github data then return (TODO: Ask about sending errors.  This will be needed for initialization)
+  console.log('13. in loadDB, successfully calls updateRepo')
   if (!gitHubData) {
     return res.json("Github user not found");
   } else {
@@ -55,7 +58,7 @@ function loadDB(developerLoginName, devData, gitHubData) {
     if (!devData) {
       //NOTE: I had the line " let devData = {..." before initializing devData with a "let" statement. HOWEVER, I only had access to this this variable inside the scope of he function...  I learned this the hard way!
       let userId = gitHubData.findIndex(e => e.owner.login === developerLoginName)
-      // console.log('id: ', userId)
+      console.log('id: ', userId)
       var devData = {
         developerLoginName: developerLoginName,
         developerGithubID: gitHubData[userId].owner.id,
@@ -75,6 +78,7 @@ function loadDB(developerLoginName, devData, gitHubData) {
       // console.log('at push: ', repo.id)
       // console.log('devID:  ', devData.developerGithubID)
       githubRepoArray.push(repo.id);
+      // console.log('14. call updateRepo')
       updateRepo(repo, devData.developerGithubID);
     });
 
@@ -85,6 +89,7 @@ function loadDB(developerLoginName, devData, gitHubData) {
 
 //  This will loop through our local database and update any repositories that were delete on github.  We will make these inactive and archived (activeFlag: false, archiveFlag: true)
 function archiveRepositories(devData, githubRepoArray) {
+  console.log('in archiveRepositories')
   devData.repositories.forEach((repositiesID) => {
     db.Repositories.findById(repositiesID).exec((err, repositiesData) => {
       // If the repoID is not null, find it in the github array of repos.
@@ -93,11 +98,12 @@ function archiveRepositories(devData, githubRepoArray) {
       }
       if (repositiesData.repoID) {
         indexNum = githubRepoArray.indexOf(repositiesData.repoID);
+        console.log('indexNum ', indexNum + " " + repositiesData.repoID)
         // If you do not find it, delete it.
         // TODO: This needs to be tested!  To test this, add a repository to github.  Make sure the mongodb is up to date.  Delete the github repository.  Sign back into your account (to run this code).  And make sure the mongodb has marked in inactive and the active flag is false.
         if (indexNum < 0) {
           db.Repositories.findOneAndUpdate(
-            { _id: repositiesData.repoID },
+            { repoID: repositiesData.repoID },
             {
               $set: {
                 archiveFlag: true,
@@ -105,8 +111,9 @@ function archiveRepositories(devData, githubRepoArray) {
               },
             }
           ).catch((err) => {
-            return res.json(err);
+            return console.log('error archiving');
           });
+          console.log('archived repo ', repositiesData.repoID)
         }
       }
     });
@@ -114,6 +121,8 @@ function archiveRepositories(devData, githubRepoArray) {
 }
 //  This will synch the two databases.
 function updateRepo(repo, devID) {
+  // console.log('14. in updateRepo ')
+  // repo is each repo, devID is the user's github id
   // Set the repo.description to the repo name if it is null (This is a required field)
   if (!repo.description) {
     repo.description = repo.name;
@@ -125,7 +134,7 @@ function updateRepo(repo, devID) {
     repoDesc: repo.description,
     activeFlag: false,
     archiveFlag: false,
-    deploymentLink: "",
+    deploymentLink: repo.homepage,
     html_url: repo.html_url,
     repoID: repo.id,
   };

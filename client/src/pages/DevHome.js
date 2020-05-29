@@ -3,7 +3,7 @@ import { DevJumbotron } from "../components/DevJumboTron";
 import PortCards from "../components/PortCards/portCards";
 import SearchBar from "../components/SearchBar/searchBar";
 import { Container, Button, Row } from "react-bootstrap";
-import DevDataContext from "../utils/DevDataContext";
+import DevDataContext from "../contexts/DevDataContext";
 import { NavigationBar } from "../components/DevHomeNav";
 import API from "../utils/API";
 

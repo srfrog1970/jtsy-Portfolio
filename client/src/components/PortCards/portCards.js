@@ -1,5 +1,6 @@
 import React from "react";
-import PortCard from "../PortCard/portCard";
+// import PortCard from "../PortCard/portCard";
+import ProjectCard from "../Card";
 import { Row, Col } from "../Grid";
 
 function PortCards(props) {
@@ -7,8 +8,8 @@ function PortCards(props) {
     <div>
       <Row>
         {props.repositories.map((repo, index) => (
-          <Col size="md-6">
-            <PortCard key={index} repo={repo} />
+          <Col size="sm-6">
+            <ProjectCard fluid key={index} repo={repo} />
           </Col>
         ))}
       </Row>

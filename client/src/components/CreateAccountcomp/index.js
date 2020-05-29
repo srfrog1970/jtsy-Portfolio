@@ -1,26 +1,26 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
 
-const formValid = ({ formErrors, ...rest }) => {
-  let valid = true;
+// const formValid = ({ formErrors, ...rest }) => {
+//   let valid = true;
 
-  // validate form errors being empty
-  Object.values(formErrors).forEach((val) => {
-    val.length > 0 && (valid = false);
-  });
+//   // validate form errors being empty
+//   Object.values(formErrors).forEach((val) => {
+//     val.length > 0 && (valid = false);
+//   });
 
-  // validate the form was filled out
-  Object.values(rest).forEach((val) => {
-    val === null && (valid = false);
-  });
+//   // validate the form was filled out
+//   Object.values(rest).forEach((val) => {
+//     val === null && (valid = false);
+//   });
 
-  return valid;
-};
+//   return valid;
+// };
 
 class CreateAccountComp extends Component {
   constructor(props) {
@@ -48,7 +48,11 @@ class CreateAccountComp extends Component {
     console.log("HMMMM");
     this.props.handleInputChange();
     API.getsync(this.state.githubID);
-    this.state.loaded = true;
+    // this.state.loaded = true;
+    this.setState({
+      ...this.state,
+      loaded: true
+    })
     // console.log(`
     //   --SUBMITTING--
     //   First Name: ${this.state.firstName}

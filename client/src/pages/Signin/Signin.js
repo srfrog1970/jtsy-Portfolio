@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 import SigninComp from "../../components/SignIncomp";
 import CreateAccountComp from "../../components/CreateAccountcomp";
-import SetupContext from "../../utils/SetupContext";
+import SetupContext from "../../contexts/SetupContext";
 import "./Signin.css";
-import DevDataContext from "../../utils/DevDataContext";
+// import DevDataContext from "../../contexts/DevDataContext";
 import { Redirect } from "react-router-dom";
-import API from "../../utils/API";
+// import API from "../../utils/API";
 
 function SignIn() {
-  const { devData, setDevData } = useContext(DevDataContext);
+  // const { devData, setDevData } = useContext(DevDataContext);
   const { setup, setSetup } = useContext(SetupContext);
   const [loggedIn, setLoggedIn] = useState({
     loggedIn: false,

@@ -1,10 +1,10 @@
 const db = require("../models");
 const mongoose = require("mongoose");
-
+console.log('6. in devDataController')
 module.exports = {
   // Get the active developer
   findActiveDeveloper: function (req, res) {
-    // console.log('in devDataController.js')
+    console.log('6a. in findActiveDeveloper')
     db.Developer.findOne({
       active: true,
     })
@@ -13,12 +13,14 @@ module.exports = {
         if (err) {
           return res.json(err);
         } else {
+          console.log('6b. dbDeveloper (w/ all repos) in devDataController ')
           return res.json(dbDeveloper);
         }
       });
   },
 
   getActiveDevData: function (req, res) {
+    console.log('6c. in getActiveDevData')
     db.Developer.findOne({
       active: true,
     })
@@ -27,12 +29,14 @@ module.exports = {
         if (err) {
           return res.json(err);
         } else {
-          console.log("here");
+          console.log("6d. here");
           if (dbDeveloper) {
             dbDeveloper.repositories = dbDeveloper.repositories.filter(
               (repository) => repository.activeFlag == "true"
             );
           }
+          // now we have the repos with activeFlag = true
+          // console.log('dbDeveloper in devDataController ', dbDeveloper.developerLoginName)
           return res.json(dbDeveloper);
         }
       });
@@ -40,12 +44,14 @@ module.exports = {
 
   //  When calling for "devDate", we will alway need the github user id.
   updateDevData: function (req, res) {
+    console.log('6e. in undateDevData')
     updateDeveloper(req.body);
     updateRepository(req.body);
   },
 };
 
 function updateDeveloper(devData) {
+  console.log('6f. in updateDeveloper')
   if (devData) {
     let developerData = {
       developerLoginName: devData.developerLoginName,
@@ -60,6 +66,7 @@ function updateDeveloper(devData) {
 }
 // TODO: Does not work.  Do not need this yet but I may need to loop through the devData.repositories and write out each individually?
 function updateRepository(devData) {
+  console.log('6g. in updateRespository')
   if (devData) {
     let repoDevData = {
       repoName: devData.name,

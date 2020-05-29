@@ -74,6 +74,7 @@ function updateRepository(devData) {
       activeFlag: false,
       archiveFlag: false,
       deploymentLink: "",
+      imageLink: "",
       html_url: devData.html_url,
       repoID: devData.id,
     };

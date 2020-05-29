@@ -135,6 +135,7 @@ function updateRepo(repo, devID) {
     activeFlag: false,
     archiveFlag: false,
     deploymentLink: repo.homepage,
+    imageLink: "",
     html_url: repo.html_url,
     repoID: repo.id,
   };

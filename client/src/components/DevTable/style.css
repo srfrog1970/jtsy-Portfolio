@@ -18,7 +18,7 @@
 }
 
 .boxTitle {
-  text-decoration: underline;
+  font-size: 1.1rem;
   margin-left: 5%;
 }
 
@@ -52,7 +52,7 @@
   margin-bottom: 10%;
 }
 
-button {
+/* button {
   background-color: rgb(57, 67, 121);
   color: white;
-}
+} */

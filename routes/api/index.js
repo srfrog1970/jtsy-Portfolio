@@ -18,8 +18,8 @@ router.use("/devData", devDataRoute);
 //
 
 // For anything else, render the html page
-router.use(function (req, res) {
-  res.sendFile(path.join(__dirname, "../../client/src/index.html"));
-});
+// router.use(function (req, res) {
+//   res.sendFile(path.join(__dirname, "../../client/src/index.html"));
+// });
 
 module.exports = router;

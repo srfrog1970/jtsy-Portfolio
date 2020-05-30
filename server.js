@@ -19,6 +19,9 @@ if (process.env.NODE_ENV === "production") {
   // app.get('*', function (req, res) {
   //   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   // });
+  app.get('*', function (req, res) {
+    res.sendFile('client/build', 'index.html');
+  });
 }
 
 // Add routes, both API and HTML.  Defaults to /routes/index.js

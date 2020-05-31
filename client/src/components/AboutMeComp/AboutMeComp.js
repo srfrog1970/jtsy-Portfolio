@@ -1,82 +1,26 @@
 import React from "react";
 import "./style.css";
-// import { InputGroup } from 'react-bootstrap';
-// import { FormControl } from "react-bootstrap"
-// import "./contactStyle.css"
 
 function AboutMeComp() {
   return (
-    
+
     <div className="aboutContainer">
-      <div className = "container">
-      <h1>Portfolio Generator</h1>
-      <h3>Description</h3>
-      <p>
-        Portfolio Generator is a React app that automatically creates a curated
-        portfolio from a developer's GitHub projects. The portfolio is presented
-        in a standardized format for potential employers, or others, to view.
+      <div className="container">
+        <p className="top"></p>
+        <h3>About Portfolio Generator</h3>
+        <p>
+          Portfolio Generator is a MERN stack app that automatically creates a curated
+          portfolio from a developer's GitHub projects. The portfolio is presented
+          in a standardized format for potential employers, or others, to view.  Originally conceived by Shawn Hayes and co-developed with Tom van Deusen and Yeng Vang, I've taken the template and customized it show my projects with my background images. See more about the original project in the github readme file.
       </p>
-      <h3>Why Use Portfolio Generator</h3>
-      <p>
-        Developers have limited time to devote to creating an attractive way to
-        display their projects. Because developers typically have multiple
-        projects in various stages of completion, they may not wish to include
-        all of them in their portfolio. Portfolio Generator was created to
-        automatically produce a professional portfolio using a subset of a
-        developer's GitHub projects.
+        <h3>About John Cannon</h3>
+        <p>
+          I am a former environmental engineer who has re-trained to become a web developer.  The experience in permitting, design, construction and interaction with public regulators and private clients relates directly to web design, in that careful project planning and management are required to complete a successful project.  Having worked for firms with 2 to 80,000 employees, I am used to working both with large, multidisciplinary teams, and on my own, where self-learning was key.  I used that desire for learning to earn a MERN certification, and continue to expand my knowledge in JavaScript and other web technologies.
+
+          I am also an avid photographer, concentrating on landscapes. Some of my images are used as backgrounds in this application.
       </p>
-      <h3>How Portfolio Generator Works</h3>
-      <p>
-        This application allows a developer to retrieve their GitHub projects
-        and select any, or all, of those to automatically create an attractive
-        portfolio.
-      </p>
-      <h3>Developer Instructions</h3>
-      <p>
-        Developers can sign up to create an account. Enter your GitHub username
-        to retrieve your full list of projects. Click anywhere in a project row to
-        make that project active. Active projects will appear on your portfolio page. If you want to include a link to the site where your project is deployed, include the full link. can optionally include a link. For instructions to clone or contribute to this
-        project, see the <a href="./../../../README.md">read me</a>.
-      </p>
-      <h3>Contributors</h3>
-      <hr></hr>
-      <p>John Cannon</p>
-      <p>
-        <a
-          href="https://github.com/frunox/"
-          alt="John Cannon's GitHub Projects"
-        >
-          John's GitHub Projects
-        </a>
-      </p>
-      <hr></hr>
-      <p>Shawn Hayes</p>
-      <p>
-        <a
-          href="https://github.com/srfrog1970/"
-          alt="Shawn Hayes' GitHub Projects"
-        >
-          Shawn's GitHub Projects
-        </a>
-      </p>
-      <hr></hr>
-      <p>Tom van Deusen</p>
-      <p>
-        <a
-          href="https://github.com/shininglite/"
-          alt="Tom van Deusen's GitHub Projects"
-        >
-          Tom's GitHub Projects
-        </a>
-      </p>
-      <hr></hr>
-      <p>Yeng Vang</p>
-      <p>
-        <a href="https://github.com/YengHV/" alt="Yeng Vang's GitHub Projects">
-          Yeng's GitHub Projects
-        </a>
-      </p>
-    </div>
+
+      </div>
     </div>
   );
 }

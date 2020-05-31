@@ -17,6 +17,7 @@ function SignIn() {
   });
 
   const handleInputChange = (e) => {
+    console.log('Signin handleInputChange')
     setLoggedIn({ loggedIn: true });
   };
 

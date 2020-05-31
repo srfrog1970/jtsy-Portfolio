@@ -4,9 +4,16 @@
 } */
 
 .aboutContainer {
-  background-image: url("../../assets/background.jpg");
-  background-size: cover;
+  background-color: teal;
   color: white;
+  position: relative;
+  top: 55px;
+  padding-bottom: 25px;
+}
+
+.top {
+  padding-top: 5px;
+  margin-top: 10px;
 }
 
 a {
@@ -17,10 +24,6 @@ a:hover {
   color: black;
 }
 
-h1 {
-  color: darkslategray;
-}
-
 h3 {
-  color: darkslategray;
+  color: rgb(20, 34, 34);
 }

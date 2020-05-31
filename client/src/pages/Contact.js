@@ -4,7 +4,7 @@ import HomeNav from "../components/HomeNav";
 
 function Contact() {
   return (
-    <div>
+    <div className='home'>
       <HomeNav />
       <ContactComp></ContactComp>
     </div>

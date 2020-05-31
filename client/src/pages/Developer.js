@@ -5,7 +5,7 @@ import DevHeader from "../components/DevHeader";
 import DevContainer from '../components/DevContainer'
 import DevTable from '../components/DevTable'
 import "./developer.css";
-// import DevDataContext from "../contexts/DevDataContext";
+import DevDataContext from "../contexts/DevDataContext";
 
 function Developer() {
 

@@ -49,7 +49,8 @@ class CreateAccountComp extends Component {
     console.log("HMMMM leaving CreateAccountcomp");
     this.props.handleInputChange();
     console.log('CreateAccountcomp call getsync()')
-    API.getsync(this.state.githubID);
+    console.log('state ', this.state.githubID, this.state.firstName, this.state.lastName, this.state.email)
+    API.getsync(this.state.githubID, this.state.firstName, this.state.lastName, this.state.email);
     // this.state.loaded = true;
     this.setState({
       ...this.state,

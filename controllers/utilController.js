@@ -7,7 +7,7 @@ module.exports = {
   // Synch the databases -Notes are in the function.
   syncDatabase: function (req, res) {
     const developerLoginName = req.params.id;
-    console.log('10a. in utilController/syncDatabase', developerLoginName)
+    console.log('10a. in utilController/syncDatabase', req.params)
     updateDevDB(developerLoginName);
     return true;
   },
@@ -32,6 +32,7 @@ function updateDevDB(developerLoginName) {
     // "https://api.github.com/search/repositories?q=user:" + developerLoginName
     // Set gitHubData to the returned data.  TODO: I thought this line of code would work?
     // .then((gitHubData) => {})
+    // gitHubData is all of the github info
     .then((data) => {
       gitHubData = data;
     })
@@ -41,7 +42,7 @@ function updateDevDB(developerLoginName) {
     })
     // Take the devData (list of repo ids) and gitHubData and call loadDB to synch Databases.
     .then((devData) => {
-      console.log('12. calling loadDB ', developerLoginName)
+      console.log('12. calling loadDB ')
       loadDB(developerLoginName, devData, gitHubData.data);
     })
     .catch((err) => console.log(err));
@@ -58,7 +59,7 @@ function loadDB(developerLoginName, devData, gitHubData) {
     if (!devData) {
       //NOTE: I had the line " let devData = {..." before initializing devData with a "let" statement. HOWEVER, I only had access to this this variable inside the scope of he function...  I learned this the hard way!
       let userId = gitHubData.findIndex(e => e.owner.login === developerLoginName)
-      console.log('id: ', userId)
+      console.log('13a. id: ', userId)
       var devData = {
         developerLoginName: developerLoginName,
         developerGithubID: gitHubData[userId].owner.id,

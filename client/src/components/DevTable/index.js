@@ -9,8 +9,10 @@ import './style.css'
 // import RepositoryContext from "../../contexts/DevDataContext";
 
 var tableData = []
+var filter = ""
+var filteredList = []
 
-const DevTable = () => {
+const DevTable = (props) => {
   // const { devData, setDevData } = useContext(DevDataContext)
   // console.log('displayRepos: ', devData.repositories.length)
   const [state, setState] = useState({
@@ -19,8 +21,10 @@ const DevTable = () => {
     data: null,
     sort: null,
     direction: null,
-    rowClick: false,
+    rowClick: -1,
+    activeFlag: "false",
     deploymentLink: "",
+    imageLink: "",
     repoName: "",
     filteredRepos: null,
     searched: -1,
@@ -43,28 +47,6 @@ const DevTable = () => {
       });
   }, []);
 
-
-  const resetRepoSearch = (e) => {
-    setState({
-      ...state,
-      filteredList: state.data.repositories,
-    });
-  };
-
-  // componentDidMount = () => {
-  //   console.log('1.  in componentDidMount')
-  //   API.getActiveDeveloper()
-  //     .then(res => {
-  //       console.log(res)
-  //       this.setState({
-  //         ...this.state,
-  //         data: res.data.repositories,
-  //         filteredRepos: res.data.repositories,
-  //       })
-  //       tableData = res.data.repositories
-  //     })
-  // }
-
   const handleSort = (clickedColumn) => () => {
     const { column, filteredRepos, direction } = state;
     console.log('in handleSort', clickedColumn)
@@ -85,7 +67,7 @@ const DevTable = () => {
     });
   };
 
-  const handleInputChange = event => {
+  const handleDeployLinkChange = event => {
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
     const name = event.target.name;
@@ -97,11 +79,23 @@ const DevTable = () => {
     });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleImageLinkChange = event => {
+    // Getting the value and name of the input which triggered the change
+    let value = event.target.value;
+    const name = event.target.name;
+    console.log(name, value)
+    // Updating the input's state
+    setState({
+      ...state,
+      imageLink: value,
+    });
+  };
+
+  const handleDeploymentLinkUpdate = (event) => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
     let value = state.deploymentLink
-    console.log('in handleFormSubmit ', state.deploymentLink)
+    console.log('in handleDeploymentLinkUpdate ', state.deploymentLink)
     setState({
       ...state,
       deploymentLink: value,
@@ -110,39 +104,50 @@ const DevTable = () => {
     updateDB(state.id, { deploymentLink: state.deploymentLink })
   }
 
+  const handleImageLinkUpdate = (event) => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+    event.preventDefault();
+    let value = state.imageLink
+    console.log('in handleImageLinkUpdate ', value)
+    setState({
+      ...state,
+      imageLink: value,
+    });
+    console.log(state.imageLink)
+    updateDB(state.id, { imageLink: state.imageLink })
+  }
+
   const handleClick = (e) => {
     console.log('in handleClick')
     setState({
       ...state,
-      rowClick: false,
+      rowClick: -1,
     });
+    filter = ""
   }
 
   const handleSearchChange = event => {
-
-    console.log(event.target.value);
-    const filter = event.target.value;
-    const filteredList = filteredRepos.filter(item => {
+    let filter = ""
+    filter = event.target.value;
+    console.log('filter: ', filter);
+    filteredList = state.data.filter(item => {
       // merge data together, then see if user input is anywhere inside
       let values = Object.values(item)
         .join("")
         .toLowerCase();
       return values.indexOf(filter.toLowerCase()) !== -1;
     });
-    console.log('filteredList', filteredList)
     setState({
       ...state,
-      filteredRepos: filteredList
-    });
-
+      filteredRepos: filteredList,
+    })
+    console.log('filteredRepos: ', filteredList)
   }
 
-  const resetSearch = (e) => {
-    setState({
-      ...state,
-      filteredRepos: state.data.repositories
-    });
-    console.log('resetSearch', filteredRepos.length)
+  const resetRepoSearch = (e) => {
+    console.log('in resetRepoSearch')
+    filteredList = []
+    handleSearchChange(e)
   };
 
   const updateFlag = (id) => {
@@ -153,17 +158,20 @@ const DevTable = () => {
       tableData[id].activeFlag = 'false';
     }
     console.log('in updateFlag ', tableData[id].activeFlag)
-    let flag = tableData[id].activeFlag;
-    setActiveFlag({ activeFlag: flag });
-    console.log('to updateDB', id, { activeFlag: flag })
-    updateDB(state.id, { activeFlag: flag })
+    setState({
+      ...state,
+      activeFlag: tableData[id].activeFlag,
+    });
+    console.log(state.id, { activeFlag: state.activeFlag })
+    updateDB(state.id, { activeFlag: tableData[id].activeFlag })
+
   };
 
   const updateDB = (id, property) => {
     console.log('in updateDB:  ', id, property)
     API.updateRepositories(id, property)
       .then(res => {
-        console.log('7. success');
+        console.log('7. success', state.imageLink);
       })
       .catch(err => {
         console.log(err)
@@ -178,12 +186,11 @@ const DevTable = () => {
     setState({
       ...state,
       id: tableData[id]._id,
-      rowClick: true,
+      rowClick: id,
       deploymentLink: tableData[id].deploymentLink,
       repoName: tableData[id].repoName,
-
+      activeFlag: tableData[id].activeFlag
     });
-    setActiveFlag({ activeFlag: tableData[id].activeFlag })
   };
 
   const { column, direction, rowClick, filteredRepos } = state;
@@ -191,7 +198,7 @@ const DevTable = () => {
   let content = (
     <Fragment>
       <span className="searchLine">
-        <RepoSearchBox handleSearchChange={handleSearchChange} resetSearch={resetSearch} />
+        <RepoSearchBox handleSearchChange={handleSearchChange} resetRepoSearch={resetRepoSearch} />
       </span>
       <div className="devTable">
         <Table sortable celled fixed inverted singleLine>
@@ -202,7 +209,7 @@ const DevTable = () => {
                 sorted={column === "name" ? direction : null}
                 onClick={handleSort("name")}
               >
-                Repo Name
+                Project Name
             </Table.HeaderCell>
               <Table.HeaderCell
                 sorted={column === "description" ? direction : null}
@@ -216,7 +223,7 @@ const DevTable = () => {
                 sorted={column === "activeFlag" ? direction : null}
                 onClick={handleSort("activeFlag")}
               >
-                Active
+                Display
             </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -237,7 +244,7 @@ const DevTable = () => {
       <div>
         <Container>
           <Modal
-            open={state.rowClick}
+            open={rowClick >= 0}
             centered={false}
             size="small"
           >
@@ -250,8 +257,8 @@ const DevTable = () => {
                 <Form >
                   <Form.Group>
                     <Form.Field>
-                      <p className="flagLabel">Update activeFlag </p>
-                      <label className="inputLabel">Active Flag: <span className="repoName">{state.activeFlag}</span></label>
+                      <p className="flagLabel">Update Display Status </p>
+                      <label className="inputLabel">Display Status: <span className="repoName">{state.activeFlag}</span></label>
                       {/* <input width={2} name="activeFlag" label='ActiveFlag Value' value={this.state.activeFlag} control='input' /> */}
                     </Form.Field>
                     <Form.Field>
@@ -261,15 +268,30 @@ const DevTable = () => {
                 </Form>
               </Segment>
               <Segment>
-                <Form>
+                <Form onSubmit={(event) => handleDeploymentLinkUpdate(event)}>
                   <Form.Group>
                     <Form.Field>
                       <p className="flagLabel">Enter Deployment URL </p>
                       <label className="inputLabel">Deployment URL: <span className="repoName">{state.deploymentLink}</span></label>
-                      <input className="urlBox" name="deploymentLink" label='Deployment URL: ' placeholder="new link" value={state.value} onChange={(event) => handleInputChange(event)} />
+                      <input className="urlBox" name="deploymentLink" label='Deployment URL: ' placeholder="new link" value={state.value} onChange={(event) => handleDeployLinkChange(event)} />
                     </Form.Field>
                     <Form.Field>
                       <Button primary type='submit'>Update</Button>
+
+                    </Form.Field>
+                  </Form.Group>
+                </Form>
+              </Segment>
+              <Segment>
+                <Form onSubmit={(event) => handleImageLinkUpdate(event)}>
+                  <Form.Group>
+                    <Form.Field>
+                      <p className="flagLabel">Enter the Image Link </p>
+                      <label className="inputLabel">Image Link: <span className="repoName">{state.imageLink}</span></label>
+                      <input className="urlBox" name="imageLink" label='Image URL: ' placeholder="new link" value={state.value} onChange={(event) => handleImageLinkChange(event)} />
+                    </Form.Field>
+                    <Form.Field>
+                      <Button primary type='submit'>Add</Button>
 
                     </Form.Field>
                   </Form.Group>

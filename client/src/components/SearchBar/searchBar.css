@@ -1,4 +1,6 @@
 .searchBar {
-  max-width: 90%;
+  width: 90%;
   margin-left: 5%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

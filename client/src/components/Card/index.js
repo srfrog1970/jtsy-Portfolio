@@ -14,8 +14,9 @@ const ProjectCard = props => {
     deploymentLink = "";
   }
   return (
-    <Card.Group className="repoCard" stackable centered itemsPerRow={2}>
+    <Card.Group className="repoCard" fluid stackable centered>
       <Card raised>
+        <Image src={props.repo.imageLink} wrapped ui={false} />
         <Card.Content>
           <Card.Header>{props.repo.repoName}</Card.Header>
           <Card.Description>{props.repo.repoDesc}</Card.Description>
@@ -24,7 +25,7 @@ const ProjectCard = props => {
           <div className='ui two buttons'>
             <Button basic color='green' target={"_blank"} href={props.repo.html_url}>
               Code
-          </Button>
+            </Button>
             <Button basic color='green' target={"_blank"} href={deploymentLink}>
               Link
           </Button>

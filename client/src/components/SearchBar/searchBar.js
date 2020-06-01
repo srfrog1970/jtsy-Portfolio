@@ -10,23 +10,25 @@ export default function searchBar({ resetSearch, handleInputChange }) {
   // const { devData, setDevData } = useContext(DevDataContext);
   // console.log(props);
   return (
-    <InputGroup className='searchBar'>
-      <FormControl
-        placeholder="Search"
-        aria-label="Search"
-        aria-describedby="basic-addon2"
-        onChange={(e) => handleInputChange(e)}
-      />
-      <InputGroup.Append>
-        <Button
-          onClick={(e) => {
-            resetSearch(e);
-          }}
-          variant="outline-secondary"
-        >
-          Clear
+    <div className="searchBar">
+      <InputGroup>
+        <FormControl
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="basic-addon2"
+          onChange={(e) => handleInputChange(e)}
+        />
+        <InputGroup.Append>
+          <Button
+            onClick={(e) => {
+              resetSearch(e);
+            }}
+            variant="dark"
+          >
+            Clear
         </Button>
-      </InputGroup.Append>
-    </InputGroup>
+        </InputGroup.Append>
+      </InputGroup>
+    </div>
   );
 }

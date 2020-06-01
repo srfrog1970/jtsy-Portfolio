@@ -1,44 +1,26 @@
-import React, { useState, useContext } from "react";
-import DevDataContext from "../../contexts/DevDataContext"
+import React from "react";
 import { Input, Button } from "semantic-ui-react";
 import "./repoSearchBox.css";
 
-function RepoSearchBox() {
-  const { devData } = useContext(DevDataContext);
+const RepoSearchBox = ({ handleSearchChange, resetRepoSearch }) => {
 
-  const [filteredRepos, setFilteredRepos] = useState({
-    filteredRepos: devData.repositories,
-  });
-
-  const handleInputChange = (event) => {
-    const filter = event.target.value;
-    var filteredList = devData.repositories.filter((item) => {
-      let values = Object.values(item).join("").toLowerCase();
-      return values.indexOf(filter.toLowerCase()) !== -1;
-    });
-    console.log("filteredList:", filteredList);
-    setFilteredRepos({
-      filteredRepos: filteredList,
-    });
-  };
-
-  const resetRepoSearch = (e) => {
-    setFilteredRepos({ filteredRepos: devData.repositories });
-  };
-
-  return (
+  let content = (
     <div className="search">
       <Input
+        as="span"
         focus
         placeholder="Search..."
         className="searchBox"
-        onChange={(e) => handleInputChange(e)}
+        onChange={(e) => handleSearchChange(e)}
       />
-      <Button onClick={(e) => {
-        resetRepoSearch(e);
-      }}>Clear</Button>
+      <Button
+        onClick={(e) => resetRepoSearch(e)}
+      >
+        Clear
+        </Button>
     </div>
-  );
-}
+  )
+  return content
+};
 
 export default RepoSearchBox;

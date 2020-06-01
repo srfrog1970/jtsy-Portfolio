@@ -13,7 +13,7 @@ function Developer() {
     <div className="devPage">
       <DevNav />
       <Container>
-        <DevHeader />
+        <DevHeader className="welcome" />
         <DevContainer />
         <DevTable />
       </Container>

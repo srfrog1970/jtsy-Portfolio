@@ -3,7 +3,7 @@ import { Header } from 'semantic-ui-react'
 import "./devHeader.css";
 
 const DevHeader = () => (
-    <div>
+    <div className="top">
         <Header as='h2'
             className="devHeader"
             textAlign='center'

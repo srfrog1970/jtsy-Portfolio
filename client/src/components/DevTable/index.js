@@ -194,9 +194,9 @@ const DevTable = () => {
         <RepoSearchBox handleSearchChange={handleSearchChange} resetSearch={resetSearch} />
       </span>
       <div className="devTable">
-        <Table sortable celled fixed striped singleLine>
-          <Table.Header>
-            <Table.Row>
+        <Table sortable celled fixed inverted singleLine>
+          <Table.Header inverted>
+            <Table.Row className="sticky">
               <Table.HeaderCell
                 width={4}
                 sorted={column === "name" ? direction : null}

@@ -1,12 +1,12 @@
 .search {
   position: relative;
-  left: 23px;
+  left: 83px;
   top: -20px;
   bottom: -5px;
 }
 
 .searchBox {
-  width: 80%;
+  width: 70%;
 }
 
 .searchbox:hover {

@@ -37,7 +37,7 @@ function Home() {
       <HomeNav />
       <Jumbotron></Jumbotron>
       <div className="lower">
-        <Row>
+        <Row className="searchRow">
           <SearchBar
             handleInputChange={handleInputChange}
             resetSearch={resetSearch}

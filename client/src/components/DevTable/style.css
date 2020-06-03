@@ -41,8 +41,8 @@
   line-height: 1.4rem;
 }
 
-.urlBox {
-  width: 25rem;
+input.urlBox {
+  width: 250rem;
   padding: 0;
   margin-bottom: 0;
 }
@@ -64,3 +64,50 @@
   background-color: rgb(57, 67, 121);
   color: white;
 } */
+
+.ui.modal {
+  position: relative;
+}
+
+.ui.modal > .header {
+  padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+}
+
+.ui.modal > .content {
+  line-height: 1;
+  padding: 0.5rem 1.5rem;
+}
+
+.ui.segment {
+  margin: 0.5rem;
+  padding: 0.5em 1em;
+}
+
+.ui.form .fields {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0;
+}
+
+.ui.form {
+  padding-top: 0.2em;
+}
+
+label.inputLabel {
+  width: 250px;
+}
+
+.ui.teal.button,
+.ui.teal.buttons .button {
+  background-color: #00b5ad;
+  color: #fff;
+  text-shadow: none;
+  background-image: none;
+  height: 33px;
+}
+
+.repoModal {
+  height: 330px;
+  margin: 0 auto;
+}

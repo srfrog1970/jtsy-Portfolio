@@ -19,8 +19,8 @@ const HomeNav = props => {
           <Menu.Item as="a" href="/contact" name="contact">
           </Menu.Item>
 
-          <Menu.Item href="/login" name="login">
-          </Menu.Item>
+          {/* <Menu.Item href="/login" name="login">
+          </Menu.Item> */}
 
           <Menu.Item as="a" href="/developer" name="developer">
           </Menu.Item>

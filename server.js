@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 // load npm package express, primarily for the router
 const express = require("express");
 // import npm package mongoose, the ODM for mongo database
@@ -17,26 +17,11 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+// Add routes, both API and HTML.  Defaults to /routes/index.js
 app.use(routes);
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-//   // app.use(express.static(path.join(__dirname, 'client/build')));s
-//   // app.get('*', function (req, res) {
-//   //   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-//   // });
-//   // app.get('*', function (req, res) {
-//   //   res.sendFile('client/build', 'index.html');
-//   // });
-//   // app.get('*', (req, res) => {
-//   //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-//   // });
-// }
-
-// Add routes, both API and HTML.  Defaults to /routes/index.js
-// app.use(routes);
 
 // Connect to the Mongo DB (portfolio_db)
 mongoose.connect(
@@ -47,15 +32,6 @@ mongoose.connect(
     useUnifiedTopology: true,
   }
 );
-
-// if (process.env.NODE_ENV === 'production') {
-//   // Serve any static files
-//   app.use(express.static(path.join(__dirname, 'client/build')));
-//   // Handle React routing, return all requests to React app
-//   app.get('*', function (req, res) {
-//     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-//   });
-// }
 
 // Start the API server on port 3001
 app.listen(PORT, () =>

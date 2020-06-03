@@ -1,3 +1,4 @@
+const path = require('path');
 // load npm package express, primarily for the router
 const express = require("express");
 // import npm package mongoose, the ODM for mongo database

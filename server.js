@@ -15,20 +15,27 @@ app.use(express.json());
 // Serve up static assets
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
-  // app.use(express.static(path.join(__dirname, 'client/build')));s
-  // app.get('*', function (req, res) {
-  //   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  // });
-  // app.get('*', function (req, res) {
-  //   res.sendFile('client/build', 'index.html');
-  // });
-  // app.get('*', (req, res) => {
-  //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  // });
 }
+app.use(routes);
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+//   // app.use(express.static(path.join(__dirname, 'client/build')));s
+//   // app.get('*', function (req, res) {
+//   //   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+//   // });
+//   // app.get('*', function (req, res) {
+//   //   res.sendFile('client/build', 'index.html');
+//   // });
+//   // app.get('*', (req, res) => {
+//   //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+//   // });
+// }
 
 // Add routes, both API and HTML.  Defaults to /routes/index.js
-app.use(routes);
+// app.use(routes);
 
 // Connect to the Mongo DB (portfolio_db)
 mongoose.connect(

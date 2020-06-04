@@ -63,9 +63,9 @@ function loadDB(developerLoginName, devData, gitHubData) {
       var devData = {
         developerLoginName: developerLoginName,
         developerGithubID: gitHubData[userId].owner.id,
-        lname: "",
-        fname: "",
-        email: "",
+        lname: "Cannon",
+        fname: "John",
+        email: "jrcannon@msn.com",
         active: true,
         repositories: [],
       };

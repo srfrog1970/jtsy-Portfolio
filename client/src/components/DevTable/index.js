@@ -188,6 +188,7 @@ const DevTable = (props) => {
       id: tableData[id]._id,
       rowClick: id,
       deploymentLink: tableData[id].deploymentLink,
+      imageLink: tableData[id].imageLink,
       repoName: tableData[id].repoName,
       activeFlag: tableData[id].activeFlag
     });

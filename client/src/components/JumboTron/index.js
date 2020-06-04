@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
-import { Jumbotron as Jumbo, Container } from "react-bootstrap";
+import { Segment, Container } from "semantic-ui-react";
 import DevDataContext from "../../contexts/DevDataContext";
 import './style.css'
 
 export const Jumbotron = (props) => {
   const { devData } = useContext(DevDataContext);
-  console.log('jumbotron: ', devData.fname)
 
   return (
-    <Jumbo fluid className="jumbo text-center">
+    <Segment className="jumbo text-center">
       <div className="overlay"></div>
       <Container>
         <h1 className="greeting">Welcome to the portfolio page for</h1>
@@ -20,6 +19,6 @@ export const Jumbotron = (props) => {
           put together!
         </h2>
       </Container>
-    </Jumbo>
+    </Segment>
   );
 }

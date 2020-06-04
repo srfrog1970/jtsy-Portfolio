@@ -1,5 +1,5 @@
 .devTable {
-  height: 260px;
+  height: 280px;
   overflow-y: scroll; /* or auto */
 }
 
@@ -81,6 +81,7 @@ input.urlBox {
 .ui.segment {
   margin: 0.5rem;
   padding: 0.5em 1em;
+  background: none;
 }
 
 .ui.form .fields {

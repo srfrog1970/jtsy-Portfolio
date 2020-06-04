@@ -16,11 +16,14 @@ const DevNav = props => {
           <Menu.Item as="a" href="/about" name="about">
           </Menu.Item>
 
-          <Menu.Item href="/login" name="login">
+          <Menu.Item as="a" href="/contact" name="contact">
           </Menu.Item>
 
-          <Menu.Item as="a" name="logout">
-          </Menu.Item>
+          {/* <Menu.Item href="/login" name="login">
+          </Menu.Item> */}
+
+          {/* <Menu.Item as="a" name="logout">
+          </Menu.Item> */}
         </Menu.Menu>
       </Menu>
 

@@ -7,7 +7,7 @@ const HomeNav = props => {
   let content = (
     <div>
       <Menu inverted stackable fixed="top" className="menu">
-        <Menu.Item header className="logo">PORTFOLIO GENERATOR</Menu.Item>
+        <Menu.Item header icon="paper plane outline" className="logo">PORTFOLIO GENERATOR</Menu.Item>
         <Menu.Menu position="left">
           <Menu.Item as="a" href="/" name="home">
           </Menu.Item>
@@ -19,8 +19,8 @@ const HomeNav = props => {
           <Menu.Item as="a" href="/contact" name="contact">
           </Menu.Item>
 
-          <Menu.Item href="/login" name="login">
-          </Menu.Item>
+          {/* <Menu.Item href="/login" name="login">
+          </Menu.Item> */}
 
           <Menu.Item as="a" href="/developer" name="developer">
           </Menu.Item>

@@ -60,7 +60,6 @@ const DevTable = (props) => {
 
       return;
     }
-
     setState({
       filteredRepos: filteredRepos.reverse(),
       direction: direction === "ascending" ? "descending" : "ascending",
@@ -182,7 +181,7 @@ const DevTable = (props) => {
     // console.log('clicked', repo)
     let id = tableData.findIndex(e => e.repoID === repo)
     console.log('id: ', id, 'deployLink: ', tableData[id].deploymentLink)
-    console.log(tableData[id]._id)
+    console.log(tableData[id]._id, 'imageLink: ', tableData[id].imageLink)
     setState({
       ...state,
       id: tableData[id]._id,

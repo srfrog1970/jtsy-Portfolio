@@ -241,17 +241,16 @@ const DevTable = (props) => {
           </Table.Body>
         </Table >
       </div >
-      <div className="modalWrapper">
+      <div>
         <Container>
           <Modal
             className="repoModal"
             open={rowClick >= 0}
-            centered
             size="tiny"
           >
             <Modal.Header className="modalHeader">Update Repository:  <span>{state.repoName}</span></Modal.Header>
             <Modal.Content>
-              <Segment className="mSegment">
+              <Segment>
                 <Form >
                   <Form.Group>
                     <Form.Field inline>
@@ -269,18 +268,18 @@ const DevTable = (props) => {
                       <label className="inputLabel">Current Deployment URL: {state.deploymentLink}</label>
                       <input className="urlBox" name="deploymentLink" label='Deployment URL: ' placeholder="new link" value={state.value} onChange={(event) => handleDeployLinkChange(event)} />
                     </Form.Field>
-                    <Button size="small" color="teal" floated="right" type='submit'>Add</Button>
+                    <Button size="small" color="teal" floated="right" type='submit'>Change</Button>
                   </Form.Group>
                 </Form>
               </Segment>
               <Segment>
                 <Form onSubmit={(event) => handleImageLinkUpdate(event)}>
                   <Form.Group>
-                    <Form.Field>
+                    <Form.Field inline>
                       <label className="inputLabel">Current Image Link: {state.imageLink}</label>
                       <input className="urlBox" name="imageLink" label='Image URL: ' placeholder="new link" value={state.value} onChange={(event) => handleImageLinkChange(event)} />
                     </Form.Field>
-                    <Button size="small" color="teal" floated="right" type='submit'>Add</Button>
+                    <Button size="small" color="teal" floated="right" type='submit'>Change</Button>
                   </Form.Group>
                 </Form>
               </Segment>

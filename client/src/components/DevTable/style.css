@@ -47,22 +47,11 @@ input.urlBox {
   width: 80%;
 }
 
-/* .sticky {
-  position: fixed;
-  top: 300px;
-  opacity: 1;
-  width: 100%;
-} */
-
-/* button {
-  background-color: rgb(57, 67, 121);
-  color: white;
-} */
-
 /* // MODAL */
 
 .ui.modal {
   position: relative;
+  height: auto;
 }
 
 /* .repoModal {
@@ -92,10 +81,6 @@ input.urlBox {
   background-image: none;
 }
 
-.mSegment {
-  background-image: none;
-}
-
 .ui.form .fields {
   display: flex;
   flex-direction: row;
@@ -103,12 +88,36 @@ input.urlBox {
   margin: 0;
 }
 
+div.inline.field {
+  width: 100%;
+  margin-top: 20px;
+}
+
 .ui.form {
   padding-top: 0.2em;
 }
 
+.ui.form .fields > .field {
+  flex: 0 1 auto;
+  /* padding-left: .5em; */
+  padding-right: 0;
+}
+
 label.inputLabel {
   width: 250px;
+}
+
+.ui.form .inline.field > input,
+.ui.form .inline.field > select,
+.ui.form .inline.fields .field > input,
+.ui.form .inline.fields .field > select {
+  display: inline-block;
+  width: 90%;
+  margin-top: 8px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-size: 1em;
+  border: 1px solid rgba(34, 36, 38, 0.4);
 }
 
 .ui.teal.button,

@@ -251,12 +251,12 @@ const DevTable = (props) => {
           >
             <Modal.Header className="modalHeader">Update Repository:  <span>{state.repoName}</span></Modal.Header>
             <Modal.Content>
-              <Segment>
+              <Segment className="mSegment">
                 <Form >
                   <Form.Group>
                     <Form.Field inline>
-                      <label className="inputLabel">Current Display Status: <span className="repoName">{state.activeFlag}</span></label>
-                      <Button size="small" type="submit" color="teal" name="updateFlag" onClick={() => updateFlag(state.rowClick)}>Change</Button>
+                      <label className="inputLabel">Current Display Status: {state.activeFlag}</label>
+                      <Button size="small" floated="right" type="submit" color="teal" name="updateFlag" onClick={() => updateFlag(state.rowClick)}>Change</Button>
                     </Form.Field>
 
                   </Form.Group>
@@ -266,7 +266,7 @@ const DevTable = (props) => {
                 <Form onSubmit={(event) => handleDeploymentLinkUpdate(event)}>
                   <Form.Group>
                     <Form.Field inline>
-                      <label className="inputLabel">Current Deployment URL: <span className="repoName">{state.deploymentLink}</span></label>
+                      <label className="inputLabel">Current Deployment URL: {state.deploymentLink}</label>
                       <input className="urlBox" name="deploymentLink" label='Deployment URL: ' placeholder="new link" value={state.value} onChange={(event) => handleDeployLinkChange(event)} />
                     </Form.Field>
                     <Button size="small" color="teal" floated="right" type='submit'>Add</Button>
@@ -277,7 +277,7 @@ const DevTable = (props) => {
                 <Form onSubmit={(event) => handleImageLinkUpdate(event)}>
                   <Form.Group>
                     <Form.Field>
-                      <label className="inputLabel">Current Image Link: <span className="repoName">{state.imageLink}</span></label>
+                      <label className="inputLabel">Current Image Link: {state.imageLink}</label>
                       <input className="urlBox" name="imageLink" label='Image URL: ' placeholder="new link" value={state.value} onChange={(event) => handleImageLinkChange(event)} />
                     </Form.Field>
                     <Button size="small" color="teal" floated="right" type='submit'>Add</Button>

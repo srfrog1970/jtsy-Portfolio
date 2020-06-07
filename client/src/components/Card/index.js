@@ -23,10 +23,10 @@ const ProjectCard = props => {
         </Card.Content>
         <Card.Content extra>
           <div className='ui two buttons'>
-            <Button basic color='green' target={"_blank"} href={props.repo.html_url}>
+            <Button basic color='teal' target={"_blank"} href={props.repo.html_url}>
               Code
             </Button>
-            <Button basic color='green' target={"_blank"} href={deploymentLink}>
+            <Button basic color='teal' target={"_blank"} href={deploymentLink}>
               Link
           </Button>
           </div>

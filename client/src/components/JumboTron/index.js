@@ -5,7 +5,7 @@ import './style.css'
 
 export const Jumbotron = (props) => {
   const { devData } = useContext(DevDataContext);
-
+  console.log('jumbotron: ', devData.fname, devData.lname)
   return (
     <Segment className="jumbo text-center">
       <div className="overlay"></div>

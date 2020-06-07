@@ -42,7 +42,7 @@ function updateDevDB(developerLoginName) {
     })
     // Take the devData (list of repo ids) and gitHubData and call loadDB to synch Databases.
     .then((devData) => {
-      console.log('12. calling loadDB ')
+      console.log('12. calling loadDB-devData in updateDevDB ', devData)
       loadDB(developerLoginName, devData, gitHubData.data);
     })
     .catch((err) => console.log(err));
@@ -69,7 +69,7 @@ function loadDB(developerLoginName, devData, gitHubData) {
         active: true,
         repositories: [],
       };
-      // console.log('line 68: ', devData.developerGithubID)
+      console.log('in loadDB-devData: ', devData)
       db.Developer.insertMany(devData);
     }
     var githubRepoArray = [];

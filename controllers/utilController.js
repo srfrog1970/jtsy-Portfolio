@@ -5,10 +5,10 @@ const axios = require("axios");
 console.log('10. in utilController')
 module.exports = {
   // Synch the databases -Notes are in the function.
-  syncDatabase: function (req, res) {
+  syncDatabase: async function (req, res) {
     const developerLoginName = req.params.id;
     console.log('10a. in utilController/syncDatabase', req.params)
-    updateDevDB(developerLoginName);
+    await updateDevDB(developerLoginName);
     return true;
   },
 };

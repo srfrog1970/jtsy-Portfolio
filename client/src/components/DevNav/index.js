@@ -7,7 +7,7 @@ const DevNav = props => {
   let content = (
     <div>
       <Menu inverted stackable fixed="top" className="menu">
-        <Menu.Item header className="logo">PORTFOLIO GENERATOR</Menu.Item>
+        <Menu.Item header className="logo">jtsy GENERATOR</Menu.Item>
         <Menu.Menu position="left">
           <Menu.Item as="a" href="/" name="home">
           </Menu.Item>

@@ -22,7 +22,7 @@ function SignIn() {
   };
 
   if (loggedIn.loggedIn) {
-    console.log('in Signin.js, redirect to /Home')
+    console.log('in Signin.js, redirect to Home page')
     return (
       <div>
         <Home />

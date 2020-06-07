@@ -8,7 +8,7 @@ const DevHeader = () => (
             className="devHeader"
             textAlign='center'
             dividing>
-            Welcome to Portfolio Generator
+            Welcome to jtsy Portfolio
         </Header>
     </div>
 )

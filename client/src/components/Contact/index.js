@@ -13,12 +13,12 @@ function ContactComp() {
         <h2>Thank you for visiting!</h2>
         <h3>Connect with me via:</h3>
         <p>
-          <a href={githubLink} target="_blank" alt="GitHub link">
+          <a href={githubLink} rel="noopener noreferrer" target="_blank" alt="GitHub link">
             GitHub
           </a>
         </p>
         <p>
-          <a href="https://www.linkedin.com/in/john-cannon-58145b105/" target="_blank" alt="LinkedIn link">
+          <a href="https://www.linkedin.com/in/john-cannon-58145b105/" rel="noopener noreferrer" target="_blank" alt="LinkedIn link">
             LinkedIn
           </a>
         </p>

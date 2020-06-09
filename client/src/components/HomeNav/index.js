@@ -2,12 +2,12 @@ import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import "./style.css";
 
-const HomeNav = props => {
+const HomeNav = () => {
 
   let content = (
     <div>
       <Menu inverted stackable fixed="top" className="menu">
-        <Menu.Item header icon="paper plane outline" className="logo">jtsy PORTFOLIO</Menu.Item>
+        <Menu.Item header className="logo">jtsy PORTFOLIO</Menu.Item>
         <Menu.Menu position="left">
           <Menu.Item as="a" href="/" name="home">
           </Menu.Item>

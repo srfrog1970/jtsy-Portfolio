@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 // import { Redirect } from "react-router-dom";
 
@@ -42,29 +42,36 @@ const CreateAccountComp = (props) => {
     },
   });
 
-  // handleInputChange is a prop from page Signin.js
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("HMMMM leaving CreateAccountcomp");
-    props.handleInputChange();
-    console.log('CreateAccountcomp call getsync()')
+  //  onSubmit={handleSubmit} - removed from form tag
+  // replaced handleSubmit with useEffect()
+
+  useEffect(() => {
+    // code to run every time `state` object changes
+    console.log('CreateAccountcomp useEffect -> call getsync()')
     console.log('state ', state.githubID, state.firstName, state.lastName, state.email)
+    props.handleInputChange();
     API.getsync(state.githubID, state.firstName, state.lastName, state.email);
-    // state.loaded = true;
     setState({
       ...state,
       loaded: true
-    })
-    // console.log(`
-    //   --SUBMITTING--
-    //   First Name: ${this.state.firstName}
-    //   Last Name: ${this.state.lastName}
-    //   Email: ${this.state.email}
-    //   Password: ${this.state.password}
-    //   Github ID: ${this.state.githubID}
-  };
+    }, [state]);
+  });
+  // handleInputChange is a prop from page Signin.js
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("HMMMM leaving CreateAccountcomp");
+  //   props.handleInputChange();
+  //   console.log('CreateAccountcomp call getsync()')
+  //   console.log('state ', state.githubID, state.firstName, state.lastName, state.email)
+  //   API.getsync(state.githubID, state.firstName, state.lastName, state.email);
+  //   // state.loaded = true;
+  //   setState({
+  //     ...state,
+  //     loaded: true
+  //   })
+  // };
 
-  const handleChange = async (e) => {
+  const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
     let formErrors = { ...state.formErrors };
@@ -95,8 +102,7 @@ const CreateAccountComp = (props) => {
         break;
     }
 
-    await setState({ formErrors, [name]: value });
-    console.log('in handleChange', state.firstName, state.lastName, state.email, state.githubID)
+    setState({ formErrors, ...state, [name]: value });
   };
 
   const { formErrors } = state;
@@ -108,7 +114,7 @@ const CreateAccountComp = (props) => {
     <div className="wrapper">
       <div className="form-wrapper">
         <h1>Create Account</h1>
-        <form onSubmit={handleSubmit} noValidate>
+        <form noValidate>
           <div className="firstName">
             <label htmlFor="firstName">First Name</label>
             <input

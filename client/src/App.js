@@ -64,7 +64,7 @@ const App = () => {
         });
       }
     });
-    console.log("App.js end initial load");
+    console.log("App.js end initial load", setup.initialized);
   }, []);
   console.log("setup.initialized", setup.initialized);
   console.log("setup.isLoadedFlag", setup.isLoadedFlag);

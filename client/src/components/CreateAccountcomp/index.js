@@ -49,27 +49,27 @@ const CreateAccountComp = (props) => {
     // code to run every time `state` object changes
     console.log('CreateAccountcomp useEffect -> call getsync()')
     console.log('state ', state.githubID, state.firstName, state.lastName, state.email)
+    // props.handleInputChange();
+    // API.getsync(state.githubID, state.firstName, state.lastName, state.email);
+    // setState({
+    //   ...state,
+    //   loaded: true
+    // }, [state]);
+  });
+  // handleInputChange is a prop from page Signin.js
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("HMMMM leaving CreateAccountcomp");
     props.handleInputChange();
+    console.log('CreateAccountcomp call getsync()')
+    console.log('state ', state.githubID, state.firstName, state.lastName, state.email)
     API.getsync(state.githubID, state.firstName, state.lastName, state.email);
+    // state.loaded = true;
     setState({
       ...state,
       loaded: true
-    }, [state]);
-  });
-  // handleInputChange is a prop from page Signin.js
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("HMMMM leaving CreateAccountcomp");
-  //   props.handleInputChange();
-  //   console.log('CreateAccountcomp call getsync()')
-  //   console.log('state ', state.githubID, state.firstName, state.lastName, state.email)
-  //   API.getsync(state.githubID, state.firstName, state.lastName, state.email);
-  //   // state.loaded = true;
-  //   setState({
-  //     ...state,
-  //     loaded: true
-  //   })
-  // };
+    })
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -114,7 +114,7 @@ const CreateAccountComp = (props) => {
     <div className="wrapper">
       <div className="form-wrapper">
         <h1>Create Account</h1>
-        <form noValidate>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="firstName">
             <label htmlFor="firstName">First Name</label>
             <input

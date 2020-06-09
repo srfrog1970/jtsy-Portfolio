@@ -36,7 +36,7 @@ const App = () => {
     initialized: false,
   });
   const setupProvider = useMemo(() => ({ setup, setSetup }), [setup, setSetup]);
-
+  console.log('App.js  setup.intialized:  ', setup.initialized)
   // On load find active user
   useEffect(() => {
     console.log("1. App.js useEffect");
@@ -64,7 +64,7 @@ const App = () => {
         });
       }
     });
-    console.log("App.js end initial load");
+    console.log("App.js end initial load", setup.initialized);
   }, []);
   console.log("setup.initialized", setup.initialized);
   console.log("setup.isLoadedFlag", setup.isLoadedFlag);

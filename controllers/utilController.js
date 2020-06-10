@@ -5,10 +5,14 @@ const axios = require("axios");
 console.log('10. in utilController')
 module.exports = {
   // Synch the databases -Notes are in the function.
-  syncDatabase: async function (req, res) {
-    const developerLoginName = req.params.id;
+  syncDatabase: function (req, res) {
     console.log('10a. in utilController/syncDatabase', req.params)
-    await updateDevDB(developerLoginName);
+    // const { developerLoginName, fname, lname, email } = req.params.id;
+
+    const developerLoginName = req.params.id
+
+    // updateDevDB(developerLoginName);
+    updateDevDB(developerLoginName);
     return true;
   },
 };
@@ -62,9 +66,9 @@ function loadDB(developerLoginName, devData, gitHubData) {
       var devData = {
         developerLoginName: developerLoginName,
         developerGithubID: gitHubData[userId].owner.id,
-        lname: "Cannon",
-        fname: "John",
-        email: "jrcannon@msn.com",
+        lname: "",
+        fname: "",
+        email: "",
         active: true,
         repositories: [],
       };

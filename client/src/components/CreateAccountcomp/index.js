@@ -45,17 +45,10 @@ const CreateAccountComp = (props) => {
   //  onSubmit={handleSubmit} - removed from form tag
   // replaced handleSubmit with useEffect()
 
-  useEffect(() => {
-    // code to run every time `state` object changes
-    console.log('CreateAccountcomp useEffect -> call getsync()')
-    console.log('state ', state.githubID, state.firstName, state.lastName, state.email)
-    // props.handleInputChange();
-    // API.getsync(state.githubID, state.firstName, state.lastName, state.email);
-    // setState({
-    //   ...state,
-    //   loaded: true
-    // }, [state]);
-  });
+  // useEffect(() => {
+  //   // code to run every time `state` object changes
+  //   console.log('createaccountcomp state in useEffect ', state.githubID, state.firstName, state.lastName, state.email)
+  // });
   // handleInputChange is a prop from page Signin.js
   const handleSubmit = (e) => {
     e.preventDefault();

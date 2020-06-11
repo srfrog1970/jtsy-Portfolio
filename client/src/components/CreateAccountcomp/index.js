@@ -60,9 +60,9 @@ const CreateAccountComp = (props) => {
     // console.log('to db: ', obj1)
     API.getsync(state.githubID);
     // state.loaded = true;
-    const developerData = { fname: state.firstName, lname: state.lastName, email: state.email }
+    const developerData = { developerLoginName: state.githubID, developerGithubID: " ", fname: state.firstName, lname: state.lastName, email: state.email, active: true }
     console.log('in createAcctComp: call updateDeveloper')
-    API.updateDeveloper(state.githubID, developerData)
+    API.updateDeveloper(developerData)
     setState({
       ...state,
       loaded: true

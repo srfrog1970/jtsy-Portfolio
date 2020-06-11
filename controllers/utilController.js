@@ -59,22 +59,16 @@ function loadDB(developerLoginName, devData, gitHubData) {
   } else {
     // If there is no devData (the user was not found in our database), set them up and insert the data.
     //  Here is where we will add new data needed from the github repository.
-    if (!devData) {
-      //NOTE: I had the line " let devData = {..." before initializing devData with a "let" statement. HOWEVER, I only had access to this this variable inside the scope of he function...  I learned this the hard way!
-      let userId = gitHubData.findIndex(e => e.owner.login === developerLoginName)
-      console.log('13a. id: ', userId)
-      var devData = {
-        developerLoginName: developerLoginName,
-        developerGithubID: gitHubData[userId].owner.id,
-        lname: "",
-        fname: "",
-        email: "",
-        active: true,
-        repositories: [],
-      };
-      console.log('13b. in loadDB-devData: ', devData.lname)
-      db.Developer.insertMany(devData);
-    }
+    // if (!devData) {
+    //NOTE: I had the line " let devData = {..." before initializing devData with a "let" statement. HOWEVER, I only had access to this this variable inside the scope of he function...  I learned this the hard way!
+    let userId = gitHubData.findIndex(e => e.owner.login === developerLoginName)
+    console.log('13a. id: ', userId)
+    var devData = {
+      developerGithubID: gitHubData[userId].owner.id,
+    };
+    console.log('13b. in loadDB: ', developerLoginName, gitHubData[userId].owner.id)
+    db.Developer.updateOne({ developerLoginName: "frunox" }, { $set: { developerGithubID: "60527588" } });
+    // }
     var githubRepoArray = [];
     console.log('utilC, gitHubData: ', gitHubData.length)
     // Loop through each github repository item and load all new records.
@@ -82,7 +76,7 @@ function loadDB(developerLoginName, devData, gitHubData) {
       // console.log('at push: ', repo.id)
       // console.log('devID:  ', devData.developerGithubID)
       githubRepoArray.push(repo.id);
-      console.log('13b. call updateRepo')
+      console.log('13c. call updateRepo')
       updateRepo(repo, devData.developerGithubID);
     });
 

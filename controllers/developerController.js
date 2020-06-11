@@ -19,12 +19,15 @@ module.exports = {
 
   // Update the Developer
   updateDeveloper: function (req, res) {
-    console.log('in devController updateDeveloper ', req.params.id, req.body)
-    db.Developer.updateOne(
-      { developerLoginName: req.params.id },
-      {
-        $set: req.body,
+    console.log('in devController updateDeveloper ', req.body)
+    db.Developer.insertMany(req.body).then((err, dbDevUpdate) => {
+      if (err) {
+        console.log('error: ', err)
+        return res.json(err);
+      } else {
+        console.log('after updateDeveloper call')
+        return res.json(dbDevUpdate);
       }
-    )
+    });
   }
 };

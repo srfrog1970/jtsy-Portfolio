@@ -54,14 +54,20 @@ const CreateAccountComp = (props) => {
     e.preventDefault();
     console.log("HMMMM leaving CreateAccountcomp");
     props.handleInputChange();
-    console.log('CreateAccountcomp call getsync()')
-    console.log('state ', state.githubID, state.firstName, state.lastName, state.email)
-    API.getsync(state.githubID, state.firstName, state.lastName, state.email);
+    console.log('CreateAccountcomp call getsync()', state.githubID)
+    // {developerLoginName: "frunox"}, {$set: {lname: "Black", fname: "Bob"}}
+    // let obj1 = { developerLoginName: state.githubID, fname: state.firstName, lname: state.lastName, email: state.email }
+    // console.log('to db: ', obj1)
+    API.getsync(state.githubID);
     // state.loaded = true;
+    const developerData = { repositories: [], developerLoginName: state.githubID, developerGithubID: " ", fname: state.firstName, lname: state.lastName, email: state.email, active: true }
+    console.log('in createAcctComp: call updateDeveloper')
+    API.updateDeveloper(developerData)
     setState({
       ...state,
       loaded: true
     })
+
   };
 
   const handleChange = (e) => {

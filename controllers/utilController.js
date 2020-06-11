@@ -5,10 +5,14 @@ const axios = require("axios");
 console.log('10. in utilController')
 module.exports = {
   // Synch the databases -Notes are in the function.
-  syncDatabase: async function (req, res) {
-    const developerLoginName = req.params.id;
-    console.log('10a. in utilController/syncDatabase', req.params)
-    await updateDevDB(developerLoginName);
+  syncDatabase: function (req, res) {
+    console.log('10a. in utilController/syncDatabase', req.params.id)
+    // const { developerLoginName, fname, lname, email } = req.params.id;
+
+    const developerLoginName = req.params.id
+
+    // updateDevDB(developerLoginName);
+    updateDevDB(developerLoginName);
     return true;
   },
 };
@@ -40,8 +44,9 @@ async function updateDevDB(developerLoginName) {
     .then(() => {
       return db.Developer.findOne({ developerLoginName: developerLoginName });
     })
-    // Take the devData (list of repo ids) and gitHubData and call loadDB to synch Databases.
+    // Take the devData (the existing data in db.developers) and gitHubData and call loadDB to synch Databases.
     .then((devData) => {
+      console.log('calling loadDB devData: ', devData)
       loadDB(developerLoginName, devData, gitHubData.data);
     })
     .catch((err) => console.log(err));
@@ -55,33 +60,38 @@ function loadDB(developerLoginName, devData, gitHubData) {
   } else {
     // If there is no devData (the user was not found in our database), set them up and insert the data.
     //  Here is where we will add new data needed from the github repository.
-    if (!devData) {
-      //NOTE: I had the line " let devData = {..." before initializing devData with a "let" statement. HOWEVER, I only had access to this this variable inside the scope of he function...  I learned this the hard way!
-      let userId = gitHubData.findIndex(e => e.owner.login === developerLoginName)
-      console.log('13a. id: ', userId)
-      var devData = {
-        developerLoginName: developerLoginName,
-        developerGithubID: gitHubData[userId].owner.id,
-        lname: "Cannon",
-        fname: "John",
-        email: "jrcannon@msn.com",
-        active: true,
-        repositories: [],
-      };
-      console.log('13b. in loadDB-devData: ', devData.lname)
-      db.Developer.insertMany(devData);
-    }
+    // if (!devData) {
+    //NOTE: I had the line " let devData = {..." before initializing devData with a "let" statement. HOWEVER, I only had access to this this variable inside the scope of he function...  I learned this the hard way!
+    let userId = gitHubData.findIndex(e => e.owner.login === developerLoginName)
+    console.log('13a. id: ', userId)
+    const developerGithubID = gitHubData[userId].owner.id
+
+    console.log('13b. in loadDB: ', developerLoginName, developerGithubID)
+    // db.Developer.updateOne({ developerLoginName: developerLoginName }, { $set: { developerGithubID: "60527588" } });
+    // }
     var githubRepoArray = [];
     console.log('utilC, gitHubData: ', gitHubData.length)
     // Loop through each github repository item and load all new records.
     gitHubData.forEach((repo) => {
       // console.log('at push: ', repo.id)
+      // const devID = developerGithubID
       // console.log('devID:  ', devData.developerGithubID)
       githubRepoArray.push(repo.id);
-      console.log('13b. call updateRepo')
-      updateRepo(repo, devData.developerGithubID);
+      // console.log('13c. call updateRepo')
+      updateRepo(repo, developerGithubID);
     });
-
+    // console.log('githubRepoArray: ', githubRepoArray)
+    // console.log(devData._id)
+    db.Developer.findOneAndUpdate(
+      { developerLoginName: developerLoginName },
+      {
+        $set: {
+          developerGithubID: developerGithubID,
+        }
+      }
+    ).catch((err) => {
+      return console.log('error adding github id number', err);
+    });
     archiveRepositories(devData, githubRepoArray);
     // loop through our database repository items.
   }
@@ -89,7 +99,7 @@ function loadDB(developerLoginName, devData, gitHubData) {
 
 //  This will loop through our local database and update any repositories that were delete on github.  We will make these inactive and archived (activeFlag: false, archiveFlag: true)
 function archiveRepositories(devData, githubRepoArray) {
-  console.log('in archiveRepositories')
+  // console.log('in archiveRepositories', githubRepoArray.length)
   devData.repositories.forEach((repositiesID) => {
     db.Repositories.findById(repositiesID).exec((err, repositiesData) => {
       // If the repoID is not null, find it in the github array of repos.
@@ -121,7 +131,7 @@ function archiveRepositories(devData, githubRepoArray) {
 }
 //  This will synch the two databases.
 async function updateRepo(repo, devID) {
-  console.log('14. in updateRepo ')
+  // console.log('14. in updateRepo: ', devID)
   // repo is each repo, devID is the user's github id
   // Set the repo.description to the repo name if it is null (This is a required field)
   if (!repo.description) {
@@ -142,14 +152,19 @@ async function updateRepo(repo, devID) {
   // Check to see if there is a record in our database with the github repo id.
   await db.Repositories.findOne({ repoID: repo.id }).exec((err, repoData) => {
     // If there is not a record in our database then add it to the repository collection.
-    // console.log('updateRepo, repoData: ', repoData, repo.id)
-    // repoData is always false.  repo.id is each repo id
+
+    // repo.id is the github id for each repo.  repoData is always null
+    // console.log('repo.id, repoData', repo.id, repoData)
+
     if (!repoData) {
+      // console.log('repoDevData', repoDevData)
       db.Repositories.insertMany(repoDevData).then((repoArray) => {
         // We also need to add the repository id to the developer .
+
         // repoDevData is defined above, repoArray is = repoDevData.  devID is the user's github id.
         // Push the repo _id from the repositories collection
         // console.log('updateRepo, devID, repoArray: ', devID, repoArray)
+
         db.Developer.findOneAndUpdate(
           { developerGithubID: devID },
           {

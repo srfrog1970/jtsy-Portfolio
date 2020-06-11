@@ -11,8 +11,9 @@ export default {
 
   // Saves the developer data.  You will need to send in the githubID in params and any fields you want to update in the developerData field.  It will update only those you send in.
 
-  updateDeveloper: function (id, developerData) {
-    return axios.post("/api/developer/" + id, developerData);
+  updateDeveloper: function (developerData) {
+    console.log('8a. in API updateDeveloper', developerData)
+    return axios.post("/api/developer/", developerData);
   },
 
   // Call this function to find the active Developer.  You do not need to pass anything in.  If none are active, it is not setup yet.
@@ -30,8 +31,8 @@ export default {
 
   // Call this function to find the active Developer.  You do not need to pass anything in.  If none are active, it is not setup yet.
 
-  getsync: function (githubID, firstName, lastName, email) {
+  getsync: function (githubID) {
     console.log('8. in API.js getsync (util route)', githubID)
-    return axios.post("/util/sync/" + githubID, firstName, lastName, email);
+    return axios.post("/util/sync/" + githubID);
   },
 };

@@ -42,26 +42,23 @@ module.exports = {
       });
   },
 
-  //  When calling for "devDate", we will alway need the github user id.
+  //  When calling for "devData", we will alway need the github user id.
   updateDevData: function (req, res) {
-    console.log('6e. in undateDevData')
+    console.log('6e. in updateDevData')
     updateDeveloper(req.body);
     updateRepository(req.body);
   },
 };
 
 function updateDeveloper(devData) {
-  console.log('6f. in updateDeveloper')
+  console.log('6f. in updateDeveloper', devData)
   if (devData) {
-    let developerData = {
-      developerLoginName: devData.developerLoginName,
-      developerGithubID: devData.developerGithubID,
-      fname: devData.fname,
-      lname: devData.lname,
-      email: devData.email,
-      active: devData.active,
-    };
-    db.Developer.insertMany(developerData);
+    db.Repositories.updateOne(
+      { developerLoginName: devData.developerLoginName },
+      {
+        $set: { lname: devData.lname, fname: devData.fname, email: devData.email },
+      }
+    )
   }
 }
 // TODO: Does not work.  Do not need this yet but I may need to loop through the devData.repositories and write out each individually?

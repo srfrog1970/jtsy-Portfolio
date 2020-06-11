@@ -5,6 +5,6 @@ const developerController = require("../../controllers/developerController");
 router.route("/:githubID").get(developerController.findDeveloper);
 
 // Update the Developer passing in the github username.
-router.route("/:githubID").post(developerController.updateDeveloper);
+router.route("/").post(developerController.updateDeveloper);
 
 module.exports = router;

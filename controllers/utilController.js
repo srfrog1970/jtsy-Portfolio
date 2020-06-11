@@ -142,9 +142,14 @@ async function updateRepo(repo, devID) {
   // Check to see if there is a record in our database with the github repo id.
   await db.Repositories.findOne({ repoID: repo.id }).exec((err, repoData) => {
     // If there is not a record in our database then add it to the repository collection.
+    // console.log('updateRepo, repoData: ', repoData, repo.id)
+    // repoData is always false.  repo.id is each repo id
     if (!repoData) {
       db.Repositories.insertMany(repoDevData).then((repoArray) => {
         // We also need to add the repository id to the developer .
+        // repoDevData is defined above, repoArray is = repoDevData.  devID is the user's github id.
+        // Push the repo _id from the repositories collection
+        // console.log('updateRepo, devID, repoArray: ', devID, repoArray)
         db.Developer.findOneAndUpdate(
           { developerGithubID: devID },
           {

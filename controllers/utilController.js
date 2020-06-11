@@ -74,13 +74,14 @@ function loadDB(developerLoginName, devData, gitHubData) {
     // Loop through each github repository item and load all new records.
     gitHubData.forEach((repo) => {
       // console.log('at push: ', repo.id)
+      // const devID = developerGithubID
       // console.log('devID:  ', devData.developerGithubID)
       githubRepoArray.push(repo.id);
-      console.log('13c. call updateRepo', devData.developerGithubID)
-      updateRepo(repo, devData.developerGithubID);
+      // console.log('13c. call updateRepo')
+      updateRepo(repo, developerGithubID);
     });
-    console.log('githubRepoArray: ', githubRepoArray)
-    console.log(devData._id)
+    // console.log('githubRepoArray: ', githubRepoArray)
+    // console.log(devData._id)
     db.Developer.findOneAndUpdate(
       { developerLoginName: developerLoginName },
       {
@@ -91,19 +92,6 @@ function loadDB(developerLoginName, devData, gitHubData) {
     ).catch((err) => {
       return console.log('error adding github id number', err);
     });
-    // add repo id's to repositories
-    db.Developer.findOneAndUpdate(
-      { developerLoginName: developerLoginName },
-      {
-        $push: {
-          repositories: { $each: githubRepoArray },
-        },
-      },
-      { new: true }
-    ).catch((err) => {
-      return console.log('error adding repo ids', err);
-    });
-    // db.Developer.updateOne({ developerLoginName: developerLoginName }, { $set: { repositories: githubRepoArray, developerGithubID: "60527588" } });
     archiveRepositories(devData, githubRepoArray);
     // loop through our database repository items.
   }
@@ -111,7 +99,7 @@ function loadDB(developerLoginName, devData, gitHubData) {
 
 //  This will loop through our local database and update any repositories that were delete on github.  We will make these inactive and archived (activeFlag: false, archiveFlag: true)
 function archiveRepositories(devData, githubRepoArray) {
-  console.log('in archiveRepositories', githubRepoArray.length)
+  // console.log('in archiveRepositories', githubRepoArray.length)
   devData.repositories.forEach((repositiesID) => {
     db.Repositories.findById(repositiesID).exec((err, repositiesData) => {
       // If the repoID is not null, find it in the github array of repos.
@@ -143,7 +131,7 @@ function archiveRepositories(devData, githubRepoArray) {
 }
 //  This will synch the two databases.
 async function updateRepo(repo, devID) {
-  console.log('14. in updateRepo: ', devID)
+  // console.log('14. in updateRepo: ', devID)
   // repo is each repo, devID is the user's github id
   // Set the repo.description to the repo name if it is null (This is a required field)
   if (!repo.description) {
@@ -164,10 +152,14 @@ async function updateRepo(repo, devID) {
   // Check to see if there is a record in our database with the github repo id.
   await db.Repositories.findOne({ repoID: repo.id }).exec((err, repoData) => {
     // If there is not a record in our database then add it to the repository collection.
+    // repo.id is the github id for each repo.  repoData is always null
+    // console.log('repo.id, repoData', repo.id, repoData)
     if (!repoData) {
+      // console.log('repoDevData', repoDevData)
       db.Repositories.insertMany(repoDevData).then((repoArray) => {
         // We also need to add the repository id to the developer .
-        // console.log('devID (user name): ', devID)
+        // repoArray == repoDevData
+        // console.log('devID: ', devID)
         db.Developer.findOneAndUpdate(
           { developerGithubID: devID },
           {

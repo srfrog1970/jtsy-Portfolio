@@ -93,7 +93,7 @@ function loadDB(developerLoginName, devData, gitHubData) {
     });
     // add repo id's to repositories
     db.Developer.findOneAndUpdate(
-      { _id: devData._id },
+      { developerLoginName: developerLoginName },
       {
         $push: {
           repositories: { $each: githubRepoArray },

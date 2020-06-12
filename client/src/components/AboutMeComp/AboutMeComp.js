@@ -23,6 +23,7 @@ function AboutMeComp() {
           I am also an avid photographer, concentrating on landscapes. Some of my images are used as backgrounds in this application.
       </p>
         <p>See my <a href={devData.resumeLink} rel="noopener noreferrer" target="_blank">resume</a></p>
+        <p>Visit my <a href={devData.portfolioLink} rel="noopener noreferrer" target="_blank">portfolio</a></p>
 
       </div>
     </div >

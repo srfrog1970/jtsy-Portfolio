@@ -31,6 +31,9 @@ const CreateAccountComp = (props) => {
     lastName: null,
     email: null,
     password: null,
+    linkedInLink: null,
+    resumeLink: null,
+    portfolioLink: null,
     githubID: null,
     loaded: null,
     formErrors: {
@@ -60,7 +63,18 @@ const CreateAccountComp = (props) => {
     // console.log('to db: ', obj1)
     API.getsync(state.githubID);
     // state.loaded = true;
-    const developerData = { repositories: [], developerLoginName: state.githubID, developerGithubID: " ", fname: state.firstName, lname: state.lastName, email: state.email, active: true }
+    const developerData = {
+      repositories: [],
+      developerLoginName: state.githubID,
+      developerGithubID: " ",
+      fname: state.firstName,
+      lname: state.lastName,
+      email: state.email,
+      linkedInLink: state.linkedInLink,
+      resumeLink: state.resumeLink,
+      portfolioLink: state.portfolioLink,
+      active: true
+    }
     console.log('in createAcctComp: call updateDeveloper')
     API.updateDeveloper(developerData)
     setState({
@@ -172,6 +186,39 @@ const CreateAccountComp = (props) => {
             )}
           </div>
           {/* Git hub */}
+          {/* LinkedIn */}
+          <div className="linkedInLink">
+            <label htmlFor="linkedInLink">LinkedIn Link</label>
+            <input
+              placeholder="LinkedIn link"
+              type="text"
+              name="linkedInLink"
+              onChange={handleChange}
+            />
+          </div>
+          {/* LinkedIn */}
+          {/* resume */}
+          <div className="resumeLink">
+            <label htmlFor="resumeLink">Resume Link</label>
+            <input
+              placeholder="Resume link"
+              type="text"
+              name="resumeLink"
+              onChange={handleChange}
+            />
+          </div>
+          {/* resume */}
+          {/* portfolio */}
+          <div className="portfolioLink">
+            <label htmlFor="portfolioLink">Portfolio Link</label>
+            <input
+              placeholder="portfolio link"
+              type="text"
+              name="portfolioLink"
+              onChange={handleChange}
+            />
+          </div>
+          {/* portfolio */}
           <div className="password">
             <label htmlFor="password">Password</label>
             <input

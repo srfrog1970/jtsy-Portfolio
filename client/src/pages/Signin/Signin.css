@@ -87,6 +87,9 @@ input.error {
 .lastName,
 .email,
 .githubID,
+.linkedInLink,
+.resumeLink,
+.portfolioLink,
 .password {
   display: flex;
   flex-direction: column;
@@ -100,6 +103,9 @@ input.error {
 
 .email,
 .githubID,
+.linkedInLink,
+.resumeLink,
+.portfolioLink,
 .password {
   width: 100%;
 }

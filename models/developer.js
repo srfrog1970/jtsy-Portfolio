@@ -31,6 +31,18 @@ const developerSchema = new Schema({
     type: String,
     required: false,
   },
+  linkedInLink: {
+    type: String,
+    required: false,
+  },
+  resumeLink: {
+    type: String,
+    required: false,
+  },
+  portfolioLink: {
+    type: String,
+    required: false,
+  },
   active: {
     type: Boolean,
     required: false,

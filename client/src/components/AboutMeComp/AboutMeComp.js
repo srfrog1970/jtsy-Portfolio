@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./style.css";
+import DevDataContext from "../../contexts/DevDataContext";
 
 function AboutMeComp() {
+  const { devData } = useContext(DevDataContext);
   return (
 
     <div className="aboutContainer">
@@ -20,7 +22,7 @@ function AboutMeComp() {
 
           I am also an avid photographer, concentrating on landscapes. Some of my images are used as backgrounds in this application.
       </p>
-        <p>See my <a href="https://docs.google.com/document/d/1HtCdlujHQQaI-xbWuMola91hCWx1dE4NU7yyJ78fkUI/edit?usp=sharing" rel="noopener noreferrer" target="_blank">resume</a></p>
+        <p>See my <a href={devData.resumeLink} rel="noopener noreferrer" target="_blank">resume</a></p>
 
       </div>
     </div >

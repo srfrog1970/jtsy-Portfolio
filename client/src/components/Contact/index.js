@@ -18,7 +18,7 @@ function ContactComp() {
           </a>
         </p>
         <p>
-          <a href="https://www.linkedin.com/in/john-cannon-58145b105/" rel="noopener noreferrer" target="_blank" alt="LinkedIn link">
+          <a href={devData.linkedInLink} rel="noopener noreferrer" target="_blank" alt="LinkedIn link">
             LinkedIn
           </a>
         </p>

@@ -1,5 +1,5 @@
 import React from "react";
-import Settings from "../../components/Settings";
+import SettingsComp from "../../components/Settings";
 import DevNav from "../../components/DevNav";
 import "./settings.css";
 
@@ -15,7 +15,7 @@ function Settings() {
     return (
         <div>
             <DevNav />
-            <Settings handleInputChange={handleInputChange}></Settings>
+            <SettingsComp handleInputChange={handleInputChange}></SettingsComp>
         </div>
     );
 

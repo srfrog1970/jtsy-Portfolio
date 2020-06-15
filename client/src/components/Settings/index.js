@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import API from "../../utils/API";
 import DevDataContext from "../../contexts/DevDataContext"
 
 console.log('in Settings')
 
 // handleInputChange is a prop from page Signin.js
-const Settings = (props) => {
+const SettingsComp = () => {
+    console.log('in SettingsComp')
     const { devData } = useContext(DevDataContext);
+    console.log('in Settings devGithubId: ', devData.developerGithubId)
     const [state, setState] = useState({
+        developerLoginName: devData.developerLoginName,
+        developerGithubId: devData.developerGithubId,
         firstName: devData.fname,
         lastName: devData.lname,
         email: devData.email,
@@ -20,9 +24,11 @@ const Settings = (props) => {
     // handleInputChange is a prop from page Signin.js
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("HMMMM leaving CreateAccountcomp");
-        props.handleInputChange();
+        console.log("in Settings handleSubmit", state.developerLoginName, state.developerGithubId);
+        // props.handleInputChange();
         const developerData = {
+            developerLoginName: state.developerLoginName,
+            developerGithubId: state.developerGithubId,
             fname: state.firstName,
             lname: state.lastName,
             email: state.email,
@@ -30,7 +36,7 @@ const Settings = (props) => {
             resumeLink: state.resumeLink,
             portfolioLink: state.portfolioLink,
         }
-        console.log('in Settings: call updateDeveloper')
+        console.log('in Settings: call updateDeveloper', state.fname, state.lname)
         API.updateDeveloper(developerData)
         setState({
             ...state,
@@ -41,62 +47,47 @@ const Settings = (props) => {
     const handleChange = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
-
+        console.log(name, value)
         setState({ ...state, [name]: value });
     };
 
     let content = (
         <div className="wrapper">
             <div className="form-wrapper">
-                <h1>Create Account</h1>
-                <form onSubmit={handleSubmit} noValidate>
+                <h1>Revise Settings</h1>
+                <form onSubmit={handleSubmit}>
                     <div className="firstName">
                         <label htmlFor="firstName">First Name</label>
                         <input
-                            className={formErrors.firstName.length > 0 ? "error" : null}
-                            placeholder="First Name"
+                            placeholder={state.firstName}
                             type="text"
                             name="firstName"
-                            noValidate
                             onChange={handleChange}
                         />
-                        {formErrors.firstName.length > 0 && (
-                            <span className="errorMessage">{formErrors.firstName}</span>
-                        )}
                     </div>
                     <div className="lastName">
                         <label htmlFor="lastName">Last Name</label>
                         <input
-                            className={formErrors.lastName.length > 0 ? "error" : null}
-                            placeholder="Last Name"
+                            placeholder={state.lastName}
                             type="text"
                             name="lastName"
-                            noValidate
                             onChange={handleChange}
                         />
-                        {formErrors.lastName.length > 0 && (
-                            <span className="errorMessage">{formErrors.lastName}</span>
-                        )}
                     </div>
                     <div className="email">
                         <label htmlFor="email">Email</label>
                         <input
-                            className={formErrors.email.length > 0 ? "error" : null}
-                            placeholder="Email"
+                            placeholder={state.email}
                             type="email"
                             name="email"
-                            noValidate
                             onChange={handleChange}
                         />
-                        {formErrors.email.length > 0 && (
-                            <span className="errorMessage">{formErrors.email}</span>
-                        )}
                     </div>
                     {/* LinkedIn */}
                     <div className="linkedInLink">
-                        <label htmlFor="linkedInLink">LinkedIn Link</label>
+                        <label htmlFor="linkedInLink">LinkedIn link</label>
                         <input
-                            placeholder="LinkedIn link"
+                            placeholder={state.linkedInLink}
                             type="text"
                             name="linkedInLink"
                             onChange={handleChange}
@@ -107,7 +98,7 @@ const Settings = (props) => {
                     <div className="resumeLink">
                         <label htmlFor="resumeLink">Resume Link</label>
                         <input
-                            placeholder="Resume link"
+                            placeholder={state.resumeLink}
                             type="text"
                             name="resumeLink"
                             onChange={handleChange}
@@ -118,7 +109,7 @@ const Settings = (props) => {
                     <div className="portfolioLink">
                         <label htmlFor="portfolioLink">Portfolio Link</label>
                         <input
-                            placeholder="portfolio link"
+                            placeholder={state.portfolioLink}
                             type="text"
                             name="portfolioLink"
                             onChange={handleChange}
@@ -135,4 +126,4 @@ const Settings = (props) => {
     return content;
 }
 
-export default Settings;
+export default SettingsComp;

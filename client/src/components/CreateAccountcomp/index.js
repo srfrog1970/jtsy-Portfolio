@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import API from "../../utils/API";
+import DevDataContext from "../../contexts/DevDataContext"
 // import { Redirect } from "react-router-dom";
 
 const emailRegex = RegExp(
@@ -10,7 +11,7 @@ console.log('in CreateAccountcomp')
 
 // handleInputChange is a prop from page Signin.js
 const CreateAccountComp = (props) => {
-
+  const { devData } = useContext(DevDataContext);
   const [state, setState] = useState({
     firstName: null,
     lastName: null,
@@ -60,7 +61,7 @@ const CreateAccountComp = (props) => {
       ...state,
       loaded: true
     })
-
+    devData.developerGithubID = state.developerGithubID;
   };
 
   const handleChange = (e) => {

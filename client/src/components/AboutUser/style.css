@@ -1,0 +1,14 @@
+/* .aboutContainer {
+  background-color: black;
+  color: white;
+} */
+
+.grid {
+  margin-top: 100px;
+  position: relative;
+  top: 30px;
+}
+
+.ui.grid > .ui.grid:last-child {
+  margin-bottom: 2em;
+}

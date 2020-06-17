@@ -1,0 +1,12 @@
+body {
+  background-color: teal;
+}
+
+.about {
+  background-color: teal;
+  max-width: 100%;
+}
+
+.aboutUser {
+  margin-top: 100px;
+}

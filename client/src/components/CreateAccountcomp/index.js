@@ -1,31 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import API from "../../utils/API";
+import DevDataContext from "../../contexts/DevDataContext"
 // import { Redirect } from "react-router-dom";
 
-const emailRegex = RegExp(
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-);
+// const emailRegex = RegExp(
+//   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+// );
 
-// const formValid = ({ formErrors, ...rest }) => {
-//   let valid = true;
-
-//   // validate form errors being empty
-//   Object.values(formErrors).forEach((val) => {
-//     val.length > 0 && (valid = false);
-//   });
-
-//   // validate the form was filled out
-//   Object.values(rest).forEach((val) => {
-//     val === null && (valid = false);
-//   });
-
-//   return valid;
-// };
 console.log('in CreateAccountcomp')
 
 // handleInputChange is a prop from page Signin.js
 const CreateAccountComp = (props) => {
-
+  const { devData } = useContext(DevDataContext);
   const [state, setState] = useState({
     firstName: null,
     lastName: null,
@@ -38,13 +24,7 @@ const CreateAccountComp = (props) => {
     loaded: null,
   });
 
-  //  onSubmit={handleSubmit} - removed from form tag
-  // replaced handleSubmit with useEffect()
 
-  // useEffect(() => {
-  //   // code to run every time `state` object changes
-  //   console.log('createaccountcomp state in useEffect ', state.githubID, state.firstName, state.lastName, state.email)
-  // });
   // handleInputChange is a prop from page Signin.js
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -74,7 +54,7 @@ const CreateAccountComp = (props) => {
       ...state,
       loaded: true
     })
-
+    devData.developerGithubID = state.developerGithubID;
   };
 
   const handleChange = (e) => {

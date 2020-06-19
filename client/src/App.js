@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Signin from "./pages/Signin/Signin";
+import Settings from "./pages/Settings/Settings";
 import API from "./utils/API";
 import DevDataContext from "./contexts/DevDataContext";
 import SetupContext from "./contexts/SetupContext";
@@ -87,6 +88,7 @@ const App = () => {
                   <Route exact path="/about" component={About} />
                   <Route exact path="/Developer" component={Developer} />
                   <Route exact path="/Signin" component={Signin} />
+                  <Route exact path="/settings" component={Settings} />
                 </SetupContext.Provider>
               </DevDataContext.Provider>
               <Route component={NoMatch} />

@@ -19,6 +19,9 @@ const DevNav = props => {
           <Menu.Item as="a" href="/contact" name="contact">
           </Menu.Item>
 
+          <Menu.Item as="a" icon="setting" href="/settings">
+          </Menu.Item>
+
           {/* <Menu.Item href="/login" name="login">
           </Menu.Item> */}
 

@@ -3,9 +3,9 @@ import API from "../../utils/API";
 import DevDataContext from "../../contexts/DevDataContext"
 // import { Redirect } from "react-router-dom";
 
-const emailRegex = RegExp(
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-);
+// const emailRegex = RegExp(
+//   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+// );
 
 console.log('in CreateAccountcomp')
 

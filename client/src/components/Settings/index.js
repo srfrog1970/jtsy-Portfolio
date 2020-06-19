@@ -11,7 +11,7 @@ const SettingsComp = () => {
     console.log('in Settings devGithubId: ', devData.developerGithubId)
     const [state, setState] = useState({
         developerLoginName: devData.developerLoginName,
-        developerGithubId: devData.developerGithubId,
+        developerGithubID: devData.developerGithubID,
         firstName: devData.fname,
         lastName: devData.lname,
         email: devData.email,
@@ -24,11 +24,11 @@ const SettingsComp = () => {
     // handleInputChange is a prop from page Signin.js
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("in Settings handleSubmit", state.developerLoginName, state.developerGithubId);
+        console.log("in Settings handleSubmit", devData.developerGithubID);
         // props.handleInputChange();
         const developerData = {
-            developerLoginName: state.developerLoginName,
-            developerGithubId: state.developerGithubId,
+            developerLoginName: devData.developerLoginName,
+            developerGithubID: devData.developerGithubID,
             fname: state.firstName,
             lname: state.lastName,
             email: state.email,
@@ -36,7 +36,7 @@ const SettingsComp = () => {
             resumeLink: state.resumeLink,
             portfolioLink: state.portfolioLink,
         }
-        console.log('in Settings: call updateDeveloper', state.fname, state.lname)
+        console.log('in Settings: call updateDeveloper', developerData.developerGithubID)
         API.updateDeveloper(developerData)
         setState({
             ...state,

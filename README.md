@@ -1,4 +1,4 @@
-# Portfolio Generator
+# jtsy-Portfolio
 
 ## Description
 
@@ -45,17 +45,41 @@ The first time you type "`npm start`" you will be prompted to enter your GitHub 
 
 You are then prompted to create an account (or sign in if you have already created an account). An account is needed so that your GitHub username is retained in the Mongo database. The database retains your curated list of projects to publish to your portfolio.
 
-<img src="client/src/assets/CreateAccount.png" alt="Create Account Screen Shot">
+<img src="client/src/assets/jtsy-create-account.png" alt="Create Account Page">
 
-#### Portfolio List
+#### Developer Page
 
-Once you have created an account or signed in, you will see a list of your GitHub projects (repositories). Click the project row, or rows, that you want to activate. Activated projects will appear in your final portfolio.
+Once you have created an account or signed in, you will see a list of your GitHub projects (repositories) on the developer page. The columns are sortable, and the search box find projects using key words.
 
-<img src="client/src/assets/PortfolioList.png" alt="Portfolio Generator Screen Shot">
+<img src="client/src/assets/jtsy-developer.png" alt="Developer Page">
+
+#### Project Page
+
+When a project is selected by clicking on it's row in the table, a modal dialog appears that allows the user to change the display status, deployment link, or image link to be included on the home page.
+
+<img src="client/src/assets/jtsy-project-modal.png" alt="Project Dialog">
+
+#### Home Page
+
+The selected projects are now displayed on the home page. The user's name is dynamically rendered from the account settings, as are the links to the code (GitHub repository) and deployed application.
+
+<img src="client/src/assets/jtsy-home.png" alt="Home Page">
+
+#### About Page
+
+This page is about the user. It can be customized as needed to individualize the presentation. The resume and portfolio links are dynamically provided from the account settings.
+
+<img src="client/src/assets/jtsy-about.png" alt="About Page">
+
+#### Contact Page
+
+This page provides links to the user's GitHub and LinkedIn pages, and an email form. The links and email address are provided from the account settings.
+
+<img src="client/src/assets/jtsy-contact.png" alt="Contact Page">
 
 ### Features
 
-We are proud of our work and hope you like it as well. Working together, we created a minimum viable product in 10 days, including: concept, design, database schema, choice of tools and methods, use instructions, documentation, and a live presentation.
+This application is intended to provide a template to be used to develop a project portfolio. The user can choose from any GitHub project and feature it on the home page. The styling can be modified to suite the user.
 
 ## Contributors
 

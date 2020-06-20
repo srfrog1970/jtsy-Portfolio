@@ -48,19 +48,50 @@ module.exports = {
     updateDeveloper(req.body);
     updateRepository(req.body);
   },
+
+  updateDeveloper: function (req, res) {
+    console.log('6f. in updateDeveloper', devData)
+    if (devData) {
+      db.Repositories.updateOne(
+        { developerLoginName: devData.developerLoginName },
+        {
+          $set: { lname: devData.lname, fname: devData.fname, email: devData.email },
+        }
+      )
+    }
+  },
+
+  // add/update optional developer information (links)
+  revDeveloper: function (req, res) {
+    console.log('6g. in revDeveloper', req.body.fname)
+    // destructure to assign developerLoginName, other data.
+    db.Developer.updateOne(
+      { developerLoginName: req.body.developerLoginName },
+      {
+        $set: {
+          fname: req.body.fname,
+          lname: req.body.lname,
+          email: req.body.email,
+          linkedInLink: req.body.linkedInLink,
+          resumeLink: req.body.resumeLink,
+          portfolioLink: req.body.portfolioLink
+        },
+      }
+    ).then((err, dbDevRev) => {
+      console.log('dev revised');
+      return res.json(dbDevRev)
+    }
+    )
+      .catch(err => console.log(err));
+  }
+
+
 };
 
-function updateDeveloper(devData) {
-  console.log('6f. in updateDeveloper', devData)
-  if (devData) {
-    db.Repositories.updateOne(
-      { developerLoginName: devData.developerLoginName },
-      {
-        $set: { lname: devData.lname, fname: devData.fname, email: devData.email },
-      }
-    )
-  }
-}
+
+
+
+
 // TODO: Does not work.  Do not need this yet but I may need to loop through the devData.repositories and write out each individually?
 function updateRepository(devData) {
   console.log('6g. in updateRespository')

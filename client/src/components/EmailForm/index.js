@@ -7,8 +7,8 @@ const EmailForm = () => {
     const { devData } = useContext(DevDataContext);
     console.log('in emailForm, email: ', devData.email);
     return (
-        <Form action={"mailto: " + devData.email} method="GET" target="_blank">
-            <Grid columns="1">
+        <Form className="formBody" action={"mailto: " + devData.email} method="GET" target="_blank">
+            <Grid className="formBody" columns="1">
                 <Grid.Column width="6">
                     <Form.Field inline className='field'>
                         <label className='label' htmlFor='subject'>Subject</label>

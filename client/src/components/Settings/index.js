@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
+import { Redirect } from 'react-router'
 import API from "../../utils/API";
-import DevDataContext from "../../contexts/DevDataContext"
+import DevDataContext from "../../contexts/DevDataContext";
+import Developer from "../../pages/Developer";
 
 console.log('in Settings')
 
@@ -18,6 +20,7 @@ const SettingsComp = () => {
         linkedInLink: devData.linkedInLink,
         resumeLink: devData.resumeLink,
         portfolioLink: devData.portfolioLink,
+        redirect: false
     });
 
 
@@ -40,6 +43,7 @@ const SettingsComp = () => {
         API.updateDeveloper(developerData)
         setState({
             ...state,
+            redirect: true,
         })
 
     };
@@ -120,6 +124,9 @@ const SettingsComp = () => {
                         <button type="submit">Change Settings</button>
                     </div>
                 </form>
+                {state.redirect && (
+                    <Redirect to={'/developer'} />
+                )}
             </div>
         </div>
     );

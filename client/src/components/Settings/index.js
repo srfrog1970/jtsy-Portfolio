@@ -58,7 +58,7 @@ const SettingsComp = () => {
     let content = (
         <div className="wrapper">
             <div className="form-wrapper">
-                <h1>Revise Settings</h1>
+                <h1>Revise User Information</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="firstName">
                         <label htmlFor="firstName">First Name</label>

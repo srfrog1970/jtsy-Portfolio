@@ -13,17 +13,17 @@ function ContactComp() {
         <h2>Thank you for visiting!</h2>
         <h3>Connect with me via:</h3>
         <p>
-          <a href={githubLink} rel="noopener noreferrer" target="_blank" alt="GitHub link">
+          <a className="links" href={githubLink} rel="noopener noreferrer" target="_blank" alt="GitHub link">
             GitHub
           </a>
         </p>
         <p>
-          <a href={devData.linkedInLink} rel="noopener noreferrer" target="_blank" alt="LinkedIn link">
+          <a className="links" href={devData.linkedInLink} rel="noopener noreferrer" target="_blank" alt="LinkedIn link">
             LinkedIn
           </a>
         </p>
         <p>
-          <h4>And Via Email</h4>
+          <h3 classname="email">And Via Email</h3>
           <EmailForm />
         </p>
       </div>

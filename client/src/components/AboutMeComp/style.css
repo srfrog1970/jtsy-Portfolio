@@ -2,9 +2,13 @@
   background-color: black;
   color: white;
 } */
+.aboutWrapper {
+  height: 100%;
+  width: 100%;
+  background-color: teal;
+}
 
 .aboutContainer {
-  background-color: teal;
   color: white;
   position: relative;
   top: 55px;

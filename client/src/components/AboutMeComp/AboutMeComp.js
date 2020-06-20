@@ -6,7 +6,7 @@ function AboutMeComp() {
   const { devData } = useContext(DevDataContext);
   return (
 
-    <div className="aboutContainer">
+    <div className="aboutContainer aboutWrapper">
       <div className="container">
         <p className="top"></p>
         <h3>About Portfolio Generator</h3>

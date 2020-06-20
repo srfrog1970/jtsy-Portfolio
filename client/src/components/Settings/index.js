@@ -29,7 +29,7 @@ const SettingsComp = () => {
         e.preventDefault();
         console.log("in Settings handleSubmit", devData.developerGithubID);
         // props.handleInputChange();
-        const developerData = {
+        const revDevData = {
             developerLoginName: devData.developerLoginName,
             developerGithubID: devData.developerGithubID,
             fname: state.firstName,
@@ -39,8 +39,8 @@ const SettingsComp = () => {
             resumeLink: state.resumeLink,
             portfolioLink: state.portfolioLink,
         }
-        console.log('in Settings: call updateDeveloper', developerData.developerGithubID)
-        API.updateDeveloper(developerData)
+        console.log('in Settings: call updateDeveloper', revDevData.developerGithubID)
+        API.revDeveloper(revDevData)
         setState({
             ...state,
             redirect: true,

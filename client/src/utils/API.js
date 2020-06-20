@@ -20,7 +20,13 @@ export default {
 
   getActiveDeveloper: function () {
     // console.log('/src/utils/API.js  getActiveDeveloper')
-    return axios.get("/api/devData/active");
+    return axios.get("/api/devData/active/");
+  },
+
+  // New function to revise developer data (name/links) via the Settings pags
+  revDeveloper: function (revDevData) {
+    console.log('8b. API.js  call revDeveloper', revDevData)
+    return axios.post("/api/devData/revDeveloper/", revDevData);
   },
 
   // Saves the developer data.  You will need to send in the githubID in params and any fields you want to update in the developerData field (This is one to many)

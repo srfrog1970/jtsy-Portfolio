@@ -6,11 +6,11 @@ import { Grid } from 'semantic-ui-react'
 
 function PortCards(props) {
   return (
-    <Grid stackable>
+    <Grid container stackable>
       <Grid.Row centered className="rows">
         {props.repositories.map((repo, index) => (
 
-          <Grid.Column width={5} table={8} className="columns">
+          <Grid.Column computer={5} table={8} className="columns">
             <ProjectCard fluid key={index} repo={repo} />
           </Grid.Column>
 

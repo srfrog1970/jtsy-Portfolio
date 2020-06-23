@@ -6,18 +6,21 @@ const RepoSearchBox = ({ handleSearchChange, resetRepoSearch }) => {
 
   let content = (
     <div className="search">
-      <Input
-        as="span"
-        focus
-        placeholder="Search..."
-        className="searchBox"
-        onChange={(e) => handleSearchChange(e)}
-      />
-      <Button
-        onClick={(e) => resetRepoSearch(e)}
-      >
-        Clear
+      <form>
+        <Input
+          as="span"
+          focus
+          placeholder="Search..."
+          className="searchBox"
+          onChange={(e) => handleSearchChange(e)}
+        />
+        <Button
+          type='reset'
+          onClick={(e) => resetRepoSearch(e)}
+        >
+          Clear
         </Button>
+      </form>
     </div>
   )
   return content

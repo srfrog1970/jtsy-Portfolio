@@ -26,7 +26,7 @@ const ProjectCard = props => {
             <Button basic color='teal' target={"_blank"} href={props.repo.html_url}>
               Code
             </Button>
-            <Button basic color='teal' target={"_blank"} href={deploymentLink}>
+            <Button basic color='teal' target={"_blank"} href={props.repo.deploymentLink}>
               Link
           </Button>
           </div>

@@ -1,19 +1,22 @@
 import React from "react";
 // import PortCard from "../PortCard/portCard";
 import ProjectCard from "../Card";
-import { Row, Col } from "../Grid";
+// import { Row, Col } from "../Grid";
+import { Grid } from 'semantic-ui-react'
 
 function PortCards(props) {
   return (
-    <div>
-      <Row>
+    <Grid stackable>
+      <Grid.Row centered className="rows">
         {props.repositories.map((repo, index) => (
-          <Col size="sm-6">
+
+          <Grid.Column width={5} table={8} className="columns">
             <ProjectCard fluid key={index} repo={repo} />
-          </Col>
+          </Grid.Column>
+
         ))}
-      </Row>
-    </div>
+      </Grid.Row>
+    </Grid>
   );
 }
 

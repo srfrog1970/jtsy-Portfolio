@@ -12,6 +12,15 @@ function SearchBox({ handleSearchChange }) {
                     aria-label="Search"
                     onChange={e => handleSearchChange(e)}
                 />
+                <button
+                    type="reset"
+                    onClick={(e) => {
+                        resetSearch(e);
+                    }}
+                    variant="dark"
+                >
+                    Clear
+        </button>
             </form>
         </div>
     );

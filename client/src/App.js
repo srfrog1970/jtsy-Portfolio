@@ -5,6 +5,7 @@ import NoMatch from "./pages/NoMatch";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
+import Login from "./pages/Login";
 import Signin from "./pages/Signin/Signin";
 import Settings from "./pages/Settings/Settings";
 import API from "./utils/API";
@@ -33,12 +34,13 @@ const App = () => {
 
   // setup - This tracks our initialization process.
   const [setup, setSetup] = useState({
-    isLoadedFlag: false,
+    isLoaded: false,
     initialized: false,
+    loggedIn: false,
   });
   const setupProvider = useMemo(() => ({ setup, setSetup }), [setup, setSetup]);
-
-  console.log("App.js setup.initialized: ", setup.initialized)
+  console.log('App.js setup.initialized ', setup.initialized, setup.isLoaded)
+  console.log("App.js setup.loggedIn: ", setup.loggedIn)
 
   // On load find active user
   useEffect(() => {
@@ -51,9 +53,11 @@ const App = () => {
         console.log('7. in App.js from controller', activeDevData.data.repositories.length)
         setDevData(activeDevData.data);
         setSetup({
-          isLoadedFlag: true,
+          isLoaded: true,
           initialized: true,
+          loggedIn: false
         });
+        console.log('loggedIn: ', setup.loggedIn)
         // console.log('after setting state and rendering, call getsync', activeDevData.data.developerLoginName)
         // API.getsync();
         let github = activeDevData.data.developerLoginName;
@@ -62,18 +66,25 @@ const App = () => {
       } else {
         console.log('in App.js useEffect, no existing dev')
         setSetup({
-          isLoadedFlag: true,
+          isLoaded: true,
           initialized: false,
+          loggedIn: false
         });
+        console.log('loggedIn: ', setup.loggedIn)
       }
     });
+    console.log('App.js SetupContext ', SetupContext._currentValue)
     console.log("App.js end initial load", setup.initialized);
   }, []);
+  console.log('SetupContext: ', SetupContext._currentValue);
   console.log("setup.initialized", setup.initialized);
-  console.log("setup.isLoadedFlag", setup.isLoadedFlag);
+  console.log("setup.isLoaded", setup.isLoaded);
+  console.log("setup.loggedIn", setup.loggedIn);
+  console.log('devDataProvider: ', devDataProvider);
+  console.log('setupProvider: ', setupProvider);
   return (
     <div>
-      {setup.isLoadedFlag ? (
+      {setup.isLoaded ? (
         <React.Fragment>
           <Router>
             <Switch>
@@ -86,7 +97,11 @@ const App = () => {
                     )}
                   <Route exact path="/contact" component={Contact} />
                   <Route exact path="/about" component={About} />
-                  <Route exact path="/Developer" component={Developer} />
+                  {setup.loggedIn ? (
+                    <Route exact path="/developer" component={Developer} />
+                  ) : (
+                      <Route exact path="/login" component={Login} />
+                    )}
                   <Route exact path="/Signin" component={Signin} />
                   <Route exact path="/settings" component={Settings} />
                 </SetupContext.Provider>

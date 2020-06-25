@@ -1,39 +1,24 @@
-import React from 'react';
-import {
-    Button,
-    Form,
-    Grid,
-    Header,
-    Segment,
-} from 'semantic-ui-react';
+import React from "react";
+import LoginForm from "../components/LoginForm";
+import HomeNav from "../components/HomeNav";
+// import "./settings.css";
 
-export default () => (
-    <Grid centered columns={2}>
-        <Grid.Column>
-            <Header as="h2" textAlign="center">
-                Login
-      </Header>
-            <Segment>
-                <Form size="large">
-                    <Form.Input
-                        fluid
-                        icon="user"
-                        iconPosition="left"
-                        placeholder="Github user name"
-                    />
-                    <Form.Input
-                        fluid
-                        icon="lock"
-                        iconPosition="left"
-                        placeholder="Password"
-                        type="password"
-                    />
+function Login() {
+    console.log('in /pages/Login.js')
+    // const { devData, setDevData } = useContext(DevDataContext);
 
-                    <Button color="blue" fluid size="large">
-                        Login
-                    </Button>
-                </Form>
-            </Segment>
-        </Grid.Column>
-    </Grid>
-);
+    // handleInputChange is passed to Settings component
+    const handleInputChange = (e) => {
+        console.log('Login handleInputChange')
+    };
+
+    return (
+        <div>
+            <HomeNav />
+            <LoginForm handleInputChange={handleInputChange}></LoginForm>
+        </div>
+    );
+
+}
+
+export default Login;

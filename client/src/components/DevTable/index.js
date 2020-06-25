@@ -4,9 +4,10 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Table, Form, Button, Modal, Container, Segment } from "semantic-ui-react";
 import API from "../../utils/API";
 import RepoSearchBox from "../RepoSearchBox";
+
 // import DevModal from "../DevModal"
 import './style.css'
-// import RepositoryContext from "../../contexts/DevDataContext";
+
 
 var tableData = []
 var filter = ""
@@ -176,6 +177,7 @@ const DevTable = (props) => {
         console.log(err)
       })
   }
+
 
   const showDevRepo = (repo) => {
     // console.log('clicked', repo)
